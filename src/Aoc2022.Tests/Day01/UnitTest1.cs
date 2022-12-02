@@ -1,6 +1,5 @@
 namespace Aoc2022.Tests.Day01;
 
-using System.Linq;
 using Aoc2022.Day01;
 
 public class Day01Test
