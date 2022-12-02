@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoc2022", "src\Aoc2022\Aoc2022.csproj", "{8EABF4FD-E171-46FE-8D7B-871E04E77ADB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoc2022.Tests", "src\Aoc2022.Tests\Aoc2022.Tests.csproj", "{5B89DFC1-C772-4D61-8545-E66F6F62AB5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EABF4FD-E171-46FE-8D7B-871E04E77ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EABF4FD-E171-46FE-8D7B-871E04E77ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EABF4FD-E171-46FE-8D7B-871E04E77ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EABF4FD-E171-46FE-8D7B-871E04E77ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B89DFC1-C772-4D61-8545-E66F6F62AB5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B89DFC1-C772-4D61-8545-E66F6F62AB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B89DFC1-C772-4D61-8545-E66F6F62AB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B89DFC1-C772-4D61-8545-E66F6F62AB5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
