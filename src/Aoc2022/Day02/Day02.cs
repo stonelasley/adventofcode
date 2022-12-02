@@ -19,7 +19,9 @@ public class Day02
 public class RpsGame
 {
     public List<RpsRound> Rounds { get; } = new();
+    public List<RpsRound> Rounds2 { get; } = new();
     public int Score => Rounds.Sum(x => x.Score);
+    public int Score2 => Rounds2.Sum(x => x.Score);
 
     public RpsGame(string[] rounds)
     {
@@ -27,6 +29,9 @@ public class RpsGame
         {
             string[] roundInput = round.Split(' ');
             Rounds.Add(new RpsRound(char.Parse(roundInput[1]), char.Parse(roundInput[0])));
+            Rounds2.Add(
+                new RpsRound(char.Parse(roundInput[0]), new ThrowOutcome(char.Parse(roundInput[1])))
+            );
         }
     }
 }
@@ -36,14 +41,7 @@ public class RpsRound
     public RpsThrow MyThrow { get; }
     public RpsThrow TheirThrow { get; }
 
-    public bool Won =>
-        TheirThrow.Shape switch
-        {
-            RpsShape.Rock => MyThrow.Shape == RpsShape.Paper,
-            RpsShape.Paper => MyThrow.Shape == RpsShape.Scissors,
-            RpsShape.Scissors => MyThrow.Shape == RpsShape.Rock,
-            _ => throw new ArgumentOutOfRangeException()
-        };
+    public bool Won => TheirThrow.Shape == MyThrow.LosingShape;
 
     public bool Draw => MyThrow.Shape == TheirThrow.Shape;
 
@@ -63,16 +61,54 @@ public class RpsRound
         }
     }
 
-    public RpsRound(char myAlias, char theirAlias)
+    public RpsRound(char myThrowAlias, char theirThrowAlias)
     {
-        MyThrow = new RpsThrow(myAlias);
-        TheirThrow = new RpsThrow(theirAlias);
+        MyThrow = new RpsThrow(myThrowAlias);
+        TheirThrow = new RpsThrow(theirThrowAlias);
     }
+
+    public RpsRound(char theirThrowAlias, ThrowOutcome throwOutcome)
+    {
+        TheirThrow = new RpsThrow(theirThrowAlias);
+        var x = TheirThrow.CounterShapeByOutcome(throwOutcome.Outcome);
+        MyThrow = new RpsThrow(x);
+    }
+}
+
+public class ThrowOutcome
+{
+    private char _alias;
+
+    public ThrowOutcome(char alias)
+    {
+        _alias = alias;
+    }
+
+    public RpsOutcome Outcome =>
+        _alias switch
+        {
+            'X' => RpsOutcome.Lose,
+            'Y' => RpsOutcome.Draw,
+            'Z' => RpsOutcome.Win,
+            _ => throw new ArgumentOutOfRangeException()
+        };
 }
 
 public class RpsThrow
 {
-    public RpsShape Shape { get; }
+    private readonly char _alias;
+    public RpsShape Shape =>
+        _alias switch
+        {
+            'A' => RpsShape.Rock,
+            'B' => RpsShape.Paper,
+            'C' => RpsShape.Scissors,
+            'X' => RpsShape.Rock,
+            'Y' => RpsShape.Paper,
+            'Z' => RpsShape.Scissors,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
     public int Score =>
         Shape switch
         {
@@ -82,30 +118,53 @@ public class RpsThrow
             _ => throw new ArgumentOutOfRangeException()
         };
 
-    public RpsThrow(char alias)
+    public RpsShape WinningShape =>
+        Shape switch
+        {
+            RpsShape.Rock => RpsShape.Paper,
+            RpsShape.Paper => RpsShape.Scissors,
+            RpsShape.Scissors => RpsShape.Rock,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+    public RpsShape LosingShape =>
+        Shape switch
+        {
+            RpsShape.Rock => RpsShape.Scissors,
+            RpsShape.Paper => RpsShape.Rock,
+            RpsShape.Scissors => RpsShape.Paper,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+    public RpsShape CounterShapeByOutcome(RpsOutcome outcome)
     {
-        Shape = GetByAlias(alias);
+        switch (outcome)
+        {
+            case RpsOutcome.Lose:
+                return LosingShape;
+            case RpsOutcome.Draw:
+                return Shape;
+            case RpsOutcome.Win:
+                return WinningShape;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(outcome), outcome, null);
+        }
     }
 
-    private RpsShape GetByAlias(char alias)
+    public RpsThrow(char alias)
     {
-        switch (alias)
+        _alias = alias;
+    }
+
+    public RpsThrow(RpsShape shape)
+    {
+        _alias = shape switch
         {
-            case 'A':
-                return RpsShape.Rock;
-            case 'B':
-                return RpsShape.Paper;
-            case 'C':
-                return RpsShape.Scissors;
-            case 'X':
-                return RpsShape.Rock;
-            case 'Y':
-                return RpsShape.Paper;
-            case 'Z':
-                return RpsShape.Scissors;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+            RpsShape.Rock => 'A',
+            RpsShape.Paper => 'B',
+            RpsShape.Scissors => 'C',
+            _ => throw new ArgumentOutOfRangeException(nameof(shape), shape, null)
+        };
     }
 }
 
@@ -114,4 +173,11 @@ public enum RpsShape
     Rock,
     Paper,
     Scissors
+}
+
+public enum RpsOutcome
+{
+    Lose,
+    Draw,
+    Win
 }

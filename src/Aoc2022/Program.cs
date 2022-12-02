@@ -10,3 +10,4 @@ var day2 = new Day02(new InputProvider<Day02>());
 Console.WriteLine($"Day One: {day1.GetMost()}");
 Console.WriteLine($"Day One Part Two: {day1.GetTopThree()}");
 Console.WriteLine($"Day Two: {day2.GetGame().Score}");
+Console.WriteLine($"Day Two Part Two: {day2.GetGame().Score2}");
