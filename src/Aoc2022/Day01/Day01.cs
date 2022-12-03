@@ -1,4 +1,4 @@
-﻿namespace Aoc2022;
+﻿namespace Aoc2022.Day01;
 
 public class Day01
 {
