@@ -1,37 +1,18 @@
-﻿namespace Aoc2022.Day01;
+﻿namespace Aoc2022;
 
 public class Day01
 {
     private readonly IInputProvider<Day01> _inputProvider;
+    private string _input;
     public Day01(IInputProvider<Day01> inputProvider)
     {
         _inputProvider = inputProvider;
     }
 
-    public List<int> GetCaloriesByElf()
+    public IEnumerable<int> GetCaloriesByElf()
     {
-        List<int> calsByElf = new ();
-        List<string> inputs = _inputProvider.Read().ToList();
-
-        var calories = 0;
-
-        for (int i = 0; i < inputs.Count; i++)
-        {
-            var calInput = inputs[i];
-            if (string.IsNullOrEmpty(calInput))
-            {
-                calsByElf.Add(calories);
-                calories = 0;
-                continue;
-            }
-            calories += Int32.Parse(calInput);
-            if (i == inputs.Count - 1)
-            {
-                calsByElf.Add(calories);
-            }
-        }
-        return calsByElf;
-
+        _input ??= _inputProvider.ReadAllText();
+        return _input.Split("\n\n").Select(x => x.Trim().Split('\n').Select(int.Parse).Sum());
     }
 
     public int GetMost() => GetCaloriesByElf().Max();

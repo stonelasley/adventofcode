@@ -1,12 +1,9 @@
-namespace Aoc2022.Tests.Day02;
+namespace Aoc2022.Tests;
 
-using Aoc2022.Day02;
+using Aoc2022;
 
-public class Day02Test
+public class Day02Test : BaseTest<Day02>
 {
-    protected Mock<IInputProvider<Day02>> InputProvider = new();
-    protected Day02 Sut;
-
     public Day02Test()
     {
         Sut = new Day02(InputProvider.Object);
