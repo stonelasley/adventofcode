@@ -43,5 +43,25 @@ public class Day03Test : BaseTest<Day03>
             var actual = Sut.RuckSackTotal();
             actual.Should().Be(157);
         }
+        
+        [Fact]
+        public void ShouldFindBadge()
+        {
+            InputProvider.Setup(x => x.Read(null))
+                .Returns(new[]
+                {
+                    "vJrwpWtwJgWrhcsFMMfFFhFp",
+                    "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+                    "PmmdzqPrVvPwwTWBwg",
+                    "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+                    "ttgJtRGJQctTZtZT",
+                    "CrZsJsPPZsGzwwsLwLmpwMDw"
+                });
+
+            var actual = Sut.BadgeTotal();
+            actual.Should().Be(70);
+        }
     }
+
+   
 }
