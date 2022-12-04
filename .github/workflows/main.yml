@@ -1,4 +1,4 @@
-name: dotnet Package
+name: main
 
 on:
   push:
