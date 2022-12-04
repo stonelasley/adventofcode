@@ -1,0 +1,45 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/Reformat/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/Shortcut/@EntryValue">aocDayTest</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/Text/@EntryValue">namespace Aoc2022.Tests;
+
+using Day$Day$;
+
+public class Day$Day$Test : BaseTest&lt;Day$Day$&gt;
+{
+    public Day$Day$Test()
+    {
+        Sut = new Day$Day$();
+    }
+
+    public class SolveOne : Day$Day$Test
+    {
+        [Fact]
+        public void ShouldDo()
+        {
+            var actual = Sut.SolveOne(InputProvider.Object);
+            actual.Should().NotBe(null);
+
+        }
+    }
+
+    public class SolveTwo : Day$Day$Test
+    {
+        
+        [Fact]
+        public void ShouldDo()
+        {
+            var actual = Sut.SolveOne(InputProvider.Object);
+            actual.Should().NotBe(null);
+        }
+    }
+}
+</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/Field/=Day/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/Field/=Day/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=96769CAA874EBF4F87B7BF55223BDCAD/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String></wpf:ResourceDictionary>

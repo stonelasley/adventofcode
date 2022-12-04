@@ -26,4 +26,11 @@
       <ProjectReference Include="..\Aoc2022\Aoc2022.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Day04\input.txt" />
+      <Content Include="Day04\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

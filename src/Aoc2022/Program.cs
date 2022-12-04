@@ -1,7 +1,7 @@
 ﻿using Aoc2022;
 
 
-for (int i = 1; i <= 3; i++)
+for (int i = 1; i <= 4; i++)
 {
     string dayName = $"Day{i.ToString("00")}";
     
