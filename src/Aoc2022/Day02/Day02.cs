@@ -1,17 +1,13 @@
 ﻿namespace Aoc2022.Day02;
 
-public class Day02
+public class Day02 : IDay
 {
-    private readonly IInputProvider<Day02> _inputProvider;
-
-    public Day02(IInputProvider<Day02> inputProvider)
+    public Game GetGame(IInputProvider inputProvider)
     {
-        _inputProvider = inputProvider;
-    }
-
-    public Game GetGame()
-    {
-        string[] input = _inputProvider.Read();
+        string[] input = inputProvider.Read();
         return new Game(input);
     }
+
+    public int SolveOne(IInputProvider inputProvider) => GetGame(inputProvider).Score;
+    public int SolveTwo(IInputProvider inputProvider) => GetGame(inputProvider).ScoreTwo;
 }

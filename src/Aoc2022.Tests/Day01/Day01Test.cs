@@ -6,7 +6,7 @@ public class Day01Test : BaseTest<Day01>
 {
     public Day01Test()
     {
-        Sut = new Day01(InputProvider.Object);
+        Sut = new Day01();
     }
 
     public class GetCaloriesByElf : Day01Test
@@ -17,7 +17,7 @@ public class Day01Test : BaseTest<Day01>
         {
             InputProvider.Setup(x => x.ReadAllText()).Returns("1000\n1000\n\n1000");
 
-            var actual = Sut.GetCaloriesByElf();
+            var actual = Sut.GetCaloriesByElf(InputProvider.Object);
             actual.Count().Should().Be(2);
             actual.First().Should().Be(2000);
             actual.Last().Should().Be(1000);
@@ -36,7 +36,7 @@ public class Day01Test : BaseTest<Day01>
             
             InputProvider.Setup(x => x.ReadAllText()).Returns("1000\n1000\n\n1000");
 
-            var actual = Sut.GetMost();
+            var actual = Sut.SolveOne(InputProvider.Object);
             actual.Should().Be(2000);
 
         }
@@ -52,7 +52,7 @@ public class Day01Test : BaseTest<Day01>
         {
             InputProvider.Setup(x => x.ReadAllText()).Returns("1000\n\n2000\n\n3000\n\n4000");
 
-            var actual = Sut.GetTopThree();
+            var actual = Sut.SolveTwo(InputProvider.Object);
             actual.Should().Be(9000);
 
         }

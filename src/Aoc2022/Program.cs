@@ -1,15 +1,12 @@
 ﻿using Aoc2022;
-using Aoc2022.Day01;
-using Aoc2022.Day02;
-using Aoc2022.Day03;
 
-Day01 day1 = new (new InputReader<Day01>());
-Day02 day2 = new (new InputReader<Day02>());
-Day03 day3 = new (new InputReader<Day03>());
 
-Console.WriteLine($"Day One: {day1.GetMost()}");
-Console.WriteLine($"Day One Part Two: {day1.GetTopThree()}");
-Console.WriteLine($"Day Two: {day2.GetGame().Score}");
-Console.WriteLine($"Day Two Part Two: {day2.GetGame().ScoreTwo}");
-Console.WriteLine($"Day Three: {day3.RuckSackTotal()}");
-Console.WriteLine($"Day Three Part Two: {day3.BadgeTotal()}");
+for (int i = 1; i <= 3; i++)
+{
+    string dayName = $"Day{i.ToString("00")}";
+    
+    IDay day = (IDay)Activator.CreateInstance(null, $"Aoc2022.{dayName}.{dayName}").Unwrap();
+    Console.WriteLine($"~~~~~~~~ Solving Day {i.ToString("00")} ~~~~~~~~~~~");
+    Console.WriteLine($"Part One: {day.SolveOne(new InputReader(dayName))}");
+    Console.WriteLine($"Part Two: {day.SolveTwo(new InputReader(dayName))}");
+}

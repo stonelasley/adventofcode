@@ -1,16 +1,22 @@
 ﻿namespace Aoc2022;
 
-public interface IInputProvider<T> where T : class
+public interface IInputProvider
 {
-    string[] Read(string? fileName = null);
+    string[] Read();
     string ReadAllText();
 }
 
-public class InputReader<T> : IInputProvider<T> where T : class
+public class InputReader : IInputProvider
 {
-    public string[] Read(string? fileName = null) =>
-        File.ReadLines(fileName ?? $"{typeof(T).Name}/input.txt").ToArray();
+    private readonly string _directory;
+
+    public InputReader(string directory)
+    {
+        _directory = directory;
+    }
+    public string[] Read() =>
+        File.ReadLines($"{_directory}/input.txt").ToArray();
 
     public string ReadAllText() =>
-        File.ReadAllText($"{typeof(T).Name}/input.txt").Trim();
+        File.ReadAllText($"{_directory}/input.txt").Trim();
 }

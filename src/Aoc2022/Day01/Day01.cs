@@ -1,21 +1,14 @@
 ﻿namespace Aoc2022.Day01;
 
-public class Day01
+public class Day01 : IDay
 {
-    private readonly IInputProvider<Day01> _inputProvider;
-    private string _input;
-    public Day01(IInputProvider<Day01> inputProvider)
+    public IEnumerable<int> GetCaloriesByElf(IInputProvider inputProvider)
     {
-        _inputProvider = inputProvider;
+        var input = inputProvider.ReadAllText();
+        return input.Split("\n\n").Select(x => x.Trim().Split('\n').Select(int.Parse).Sum());
     }
 
-    public IEnumerable<int> GetCaloriesByElf()
-    {
-        _input ??= _inputProvider.ReadAllText();
-        return _input.Split("\n\n").Select(x => x.Trim().Split('\n').Select(int.Parse).Sum());
-    }
-
-    public int GetMost() => GetCaloriesByElf().Max();
-    public int GetTopThree() => GetCaloriesByElf().OrderByDescending(x => x).Take(3).Sum();
+    public int SolveOne(IInputProvider inputProvider) => GetCaloriesByElf(inputProvider).Max();
+    public int SolveTwo(IInputProvider inputProvider) => GetCaloriesByElf(inputProvider).OrderByDescending(x => x).Take(3).Sum();
     
 }
