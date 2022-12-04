@@ -15,7 +15,7 @@ public class Day01Test : BaseTest<Day01>
         [Fact]
         public void ShouldGroupCalories()
         {
-            InputProvider.Setup(x => x.ReadAllText()).Returns("1000\n1000\n\n1000");
+            InputProvider.Setup(x => x.ReadAllText()).Returns($"1000{Environment.NewLine}1000{Environment.NewLine}{Environment.NewLine}1000");
 
             var actual = Sut.GetCaloriesByElf(InputProvider.Object);
             actual.Count().Should().Be(2);
@@ -34,7 +34,7 @@ public class Day01Test : BaseTest<Day01>
         public void ShouldGetHighest()
         {
             
-            InputProvider.Setup(x => x.ReadAllText()).Returns("1000\n1000\n\n1000");
+            InputProvider.Setup(x => x.ReadAllText()).Returns($"1000{Environment.NewLine}1000{Environment.NewLine}{Environment.NewLine}1000");
 
             var actual = Sut.SolveOne(InputProvider.Object);
             actual.Should().Be(2000);
@@ -50,7 +50,7 @@ public class Day01Test : BaseTest<Day01>
         [Fact]
         public void ShouldGetTopThree()
         {
-            InputProvider.Setup(x => x.ReadAllText()).Returns("1000\n\n2000\n\n3000\n\n4000");
+            InputProvider.Setup(x => x.ReadAllText()).Returns($"1000{Environment.NewLine}{Environment.NewLine}2000{Environment.NewLine}{Environment.NewLine}3000{Environment.NewLine}{Environment.NewLine}4000");
 
             var actual = Sut.SolveTwo(InputProvider.Object);
             actual.Should().Be(9000);

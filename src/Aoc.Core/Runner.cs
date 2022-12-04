@@ -13,7 +13,7 @@ public static class Runner
             IDay? day = null;
             try
             {
-                day = (IDay?) Activator.CreateInstance(assembly.GetName().Name!, $"Aoc2022.{dayName}.{dayName}")
+                day = (IDay?) Activator.CreateInstance(assembly.GetName().Name!, $"{assembly.GetName().Name}.{dayName}.{dayName}")
                     ?.Unwrap();
             }
             catch (Exception)
