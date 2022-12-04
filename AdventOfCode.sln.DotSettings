@@ -21,7 +21,7 @@ public class Day$Day$Test : BaseTest&lt;Day$Day$&gt;
         public void ShouldDo()
         {
             var actual = Sut.SolveOne(InputProvider.Object);
-            actual.Should().NotBe(null);
+            actual.Should().NotBe(-1);
 
         }
     }
@@ -33,7 +33,7 @@ public class Day$Day$Test : BaseTest&lt;Day$Day$&gt;
         public void ShouldDo()
         {
             var actual = Sut.SolveOne(InputProvider.Object);
-            actual.Should().NotBe(null);
+            actual.Should().NotBe(-1);
         }
     }
 }
