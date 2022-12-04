@@ -1,5 +1,3 @@
-using Aoc2022.Day02;
-
 namespace Aoc2022.Tests.Day02;
 
 using Aoc2022.Day02;

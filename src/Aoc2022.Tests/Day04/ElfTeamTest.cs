@@ -1,6 +1,6 @@
-using Aoc2022.Day04;
+namespace Aoc2022.Tests.Day04;
 
-namespace Aoc2022.Tests;
+using Aoc2022.Day04;
 
 public class ElfTeamTest : BaseTest<ElfTeamTest>
 {

@@ -1,6 +1,6 @@
-namespace Aoc2022.Tests;
+namespace Aoc2022.Tests.Day01;
 
-using Day01;
+using Aoc2022.Day01;
 
 public class Day01Test : BaseTest<Day01>
 {
