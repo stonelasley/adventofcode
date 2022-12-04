@@ -1,4 +1,4 @@
-namespace Aoc2022;
+namespace Aoc.Core;
 
 public interface IDay
 {

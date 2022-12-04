@@ -1,4 +1,6 @@
-namespace Aoc2022.Tests;
+namespace Aoc.Core.Tests;
+
+using Moq;
 
 public abstract class BaseTest<T> where T : class
 {
