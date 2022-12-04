@@ -22,9 +22,5 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Install dependencies
-        run: dotnet restore src/AdventOfCode.sln
-      - name: Build
-        run: dotnet build --configuration Release --no-restore src/AdventOfCode.sln
       - name: Test
         run: dotnet test --verbosity normal src/AdventOfCode.sln
