@@ -55,4 +55,26 @@ public class CrateStateTest
         sut.Stacks[2].Count.Should().Be(4);
         sut.Stacks[2].Peek().Should().Be('Z');
     }
+
+    [Fact]
+    public void ShouldProcessBatchTransfer()
+    {
+        List<CrateLocationLine> initialState = new()
+        {
+            new CrateLocationLine("    [D]    "),
+            new CrateLocationLine("[N] [C]    "),
+            new CrateLocationLine("[Z] [M] [P]")
+        };
+
+        CrateState sut = new("1  2  3");
+        sut.Initialize(initialState);
+        sut.ProcessBatchTransfer(new TransferInstruction("move 1 from 2 to 1"));
+        sut.ProcessBatchTransfer(new TransferInstruction("move 3 from 1 to 3"));
+
+        sut.Stacks[0].Count.Should().Be(0);
+        sut.Stacks[1].Count.Should().Be(2);
+        sut.Stacks[1].Peek().Should().Be('C');
+        sut.Stacks[2].Count.Should().Be(4);
+        sut.Stacks[2].Peek().Should().Be('D');
+    }
 }
