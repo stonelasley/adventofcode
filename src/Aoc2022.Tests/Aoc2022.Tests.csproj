@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0"/>
-        <PackageReference Include="xunit" Version="2.4.2"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
+        <PackageReference Include="xunit" Version="2.4.2" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -17,12 +17,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Aoc.Core.Tests\Aoc.Core.Tests.csproj"/>
-        <ProjectReference Include="..\Aoc2022\Aoc2022.csproj"/>
+        <ProjectReference Include="..\Aoc.Core.Tests\Aoc.Core.Tests.csproj" />
+        <ProjectReference Include="..\Aoc2022\Aoc2022.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Day04\input.txt"/>
+        <None Remove="Day04\input.txt" />
         <Content Include="Day04\input.txt">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
