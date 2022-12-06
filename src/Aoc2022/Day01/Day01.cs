@@ -13,7 +13,7 @@ public class Day01 : IDay
                         .Sum());
     }
 
-    public int SolveOne(IInputProvider inputProvider) => GetCaloriesByElf(inputProvider).Max();
-    public int SolveTwo(IInputProvider inputProvider) => GetCaloriesByElf(inputProvider).OrderByDescending(x => x).Take(3).Sum();
+    public string SolveOne(IInputProvider inputProvider) => GetCaloriesByElf(inputProvider).Max().ToString();
+    public string SolveTwo(IInputProvider inputProvider) => GetCaloriesByElf(inputProvider).OrderByDescending(x => x).Take(3).Sum().ToString();
     
 }

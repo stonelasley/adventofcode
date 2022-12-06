@@ -2,6 +2,6 @@ namespace Aoc.Core;
 
 public interface IDay
 {
-    int SolveOne(IInputProvider inputProvider);
-    int SolveTwo(IInputProvider inputProvider);
+    string SolveOne(IInputProvider inputProvider);
+    string SolveTwo(IInputProvider inputProvider);
 }

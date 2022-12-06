@@ -2,7 +2,7 @@
 
 public class Day03 : IDay
 {
-    public int SolveOne(IInputProvider inputProvider)
+    public string SolveOne(IInputProvider inputProvider)
     {
         IEnumerable<char[]> lines = inputProvider.Read().Select(x => x.ToCharArray()).ToList();
         string[] rows = new string[lines.First().Length];
@@ -41,10 +41,10 @@ public class Day03 : IDay
         var gammaTotal = Convert.ToInt32(gamma, 2);
         var epsilonTotal = Convert.ToInt32(epsilon, 2);
 
-        return epsilonTotal * gammaTotal;
+        return $"{epsilonTotal * gammaTotal}";
     }
 
-    public int SolveTwo(IInputProvider inputProvider)
+    public string SolveTwo(IInputProvider inputProvider)
     {
         IEnumerable<string> lines = inputProvider.Read().ToList();
         IList<char[]> lineArrays = lines.Select(_ => _.ToCharArray()).ToList();
@@ -55,7 +55,7 @@ public class Day03 : IDay
         // Console.WriteLine($"OXYGEN GENERATOR RATING: {o2Rating}");
         //Console.WriteLine($"CO2 SCRUBBER RATING: {co2Rating}");
         //Console.WriteLine($"LIFE SUPPORT RATING: {o2Rating * co2Rating}");
-        return o2Rating * co2Rating;
+        return $"{o2Rating * co2Rating}";
     }
     
     static int GetO2Rating(IList<char[]> lines)

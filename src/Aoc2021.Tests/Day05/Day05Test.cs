@@ -30,8 +30,8 @@ public class Day05Test : BaseTest<Aoc2021.Day05.Day05>
                     }
                 );
 
-            var actual = Sut.SolveOne(InputProvider.Object);
-            actual.Should().Be(5);
+            string actual = Sut.SolveOne(InputProvider.Object);
+            actual.Should().Be("5");
         }
     }
 
@@ -45,8 +45,8 @@ public class Day05Test : BaseTest<Aoc2021.Day05.Day05>
                 ""
             });
 
-            var actual = Sut.SolveTwo(InputProvider.Object);
-            actual.Should().Be(1);
+            string actual = Sut.SolveTwo(InputProvider.Object);
+            actual.Should().Be("1");
         }
     }
 }

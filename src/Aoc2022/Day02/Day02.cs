@@ -8,6 +8,6 @@ public class Day02 : IDay
         return new Game(input);
     }
 
-    public int SolveOne(IInputProvider inputProvider) => GetGame(inputProvider).Score;
-    public int SolveTwo(IInputProvider inputProvider) => GetGame(inputProvider).ScoreTwo;
+    public string SolveOne(IInputProvider inputProvider) => GetGame(inputProvider).Score.ToString();
+    public string SolveTwo(IInputProvider inputProvider) => GetGame(inputProvider).ScoreTwo.ToString();
 }

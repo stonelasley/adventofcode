@@ -2,7 +2,7 @@
 
 public class Day05 : IDay
 {
-    public int SolveOne(IInputProvider inputProvider)
+    public string SolveOne(IInputProvider inputProvider)
     {
         Map map = new(inputProvider);
         var count = 0;
@@ -11,11 +11,11 @@ public class Day05 : IDay
             count += map.Plot.GetRow(i).Where(x => x > 1).Count();
         }
 
-        return count;
+        return count.ToString();
     }
 
-    public int SolveTwo(IInputProvider inputProvider)
+    public string SolveTwo(IInputProvider inputProvider)
     {
-        return -1;
+        return "";
     }
 }

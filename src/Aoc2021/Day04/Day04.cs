@@ -2,7 +2,7 @@
 
 public class Day04 : IDay
 {
-    public int SolveOne(IInputProvider inputProvider)
+    public string SolveOne(IInputProvider inputProvider)
     {
         IEnumerable<string> fileInput = inputProvider.Read();
 
@@ -11,10 +11,10 @@ public class Day04 : IDay
 
         List<Board> bingoBoards = BingoGame.Setup(boardInput);
 
-        return BingoGame.GetWinningBoardScore(bingoCalls, bingoBoards);
+        return BingoGame.GetWinningBoardScore(bingoCalls, bingoBoards).ToString();
     }
 
-    public int SolveTwo(IInputProvider inputProvider)
+    public string SolveTwo(IInputProvider inputProvider)
     {
         IEnumerable<string> fileInput = inputProvider.Read();
 
@@ -23,7 +23,7 @@ public class Day04 : IDay
 
         List<Board> bingoBoards = BingoGame.Setup(boardInput);
 
-        return BingoGame.GetLosingBoard(bingoCalls, bingoBoards);
+        return BingoGame.GetLosingBoard(bingoCalls, bingoBoards).ToString();
 
     }
 }

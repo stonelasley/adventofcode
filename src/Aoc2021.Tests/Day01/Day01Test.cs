@@ -21,7 +21,7 @@ public class Day01Test : BaseTest<Day01>
                 );
 
             var actual = Sut.SolveOne(InputProvider.Object);
-            actual.Should().Be(7);
+            actual.Should().Be("7");
         }
     }
 
@@ -45,7 +45,7 @@ public class Day01Test : BaseTest<Day01>
             });
 
             var actual = Sut.SolveTwo(InputProvider.Object);
-            actual.Should().Be(5);
+            actual.Should().Be("5");
         }
     }
 }

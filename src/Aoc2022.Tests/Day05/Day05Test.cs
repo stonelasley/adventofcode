@@ -25,6 +25,6 @@ public class Day05Test : BaseTest<Aoc2022.Day05.Day05>
             });
 
         var actual = Sut.SolveOne(InputProvider.Object);
-        actual.Should().Be(1);
+        actual.Should().Be("CMZ");
     }
 }

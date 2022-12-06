@@ -2,7 +2,7 @@
 
 public class Day01 : IDay
 {
-    public int SolveOne(IInputProvider inputProvider)
+    public string SolveOne(IInputProvider inputProvider)
     {
         int previous = int.MaxValue;
         int total = 0;
@@ -17,10 +17,10 @@ public class Day01 : IDay
             previous = current;
         }
 
-        return total;
+        return total.ToString();
     }
 
-    public int SolveTwo(IInputProvider inputProvider)
+    public string SolveTwo(IInputProvider inputProvider)
     {
         int[] lines = inputProvider.Read().Select(int.Parse).ToArray();
 
@@ -38,6 +38,6 @@ public class Day01 : IDay
 
             previous = currentWindow;
         }
-        return total;
+        return total.ToString();
     }
 }

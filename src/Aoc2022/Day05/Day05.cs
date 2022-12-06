@@ -1,8 +1,10 @@
-﻿namespace Aoc2022.Day05;
+﻿using System.Text;
+
+namespace Aoc2022.Day05;
 
 public class Day05 : IDay
 {
-    public int SolveOne(IInputProvider inputProvider)
+    public string SolveOne(IInputProvider inputProvider)
     {
         List<TransferInstruction> transferInstructions = new();
         List<CrateLocationLine> crateLocations = new();
@@ -32,17 +34,17 @@ public class Day05 : IDay
         var crateState = new CrateState(crateStateLine);
         crateState.Initialize(crateLocations);
         transferInstructions.ForEach(crateState.ProcessTransfer);
+        StringBuilder sb = new StringBuilder();
         foreach (var stack in crateState.Stacks)
         {
-            var top = stack.Peek();
-            Console.Write(top);
+            sb.Append(stack.Peek().ToString());
         }
 
-        return 1;
+        return sb.ToString();
     }
 
-    public int SolveTwo(IInputProvider inputProvider)
+    public string SolveTwo(IInputProvider inputProvider)
     {
-        return -1;
+        return "-1";
     }
 }

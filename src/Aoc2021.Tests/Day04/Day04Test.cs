@@ -42,7 +42,7 @@ public class Day04Test : BaseTest<Day04>
                 );
 
             var actual = Sut.SolveOne(InputProvider.Object);
-            actual.Should().Be(4512);
+            actual.Should().Be("4512");
         }
     }
 
@@ -75,7 +75,7 @@ public class Day04Test : BaseTest<Day04>
             });
 
             var actual = Sut.SolveTwo(InputProvider.Object);
-            actual.Should().Be(1924);
+            actual.Should().Be("1924");
         }
     }
 }

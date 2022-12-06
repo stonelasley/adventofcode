@@ -7,7 +7,7 @@ public class Day03 : IDay
         return inputProvider.Read().Select(x => new RuckSack(x)).ToList();
     }
 
-    public int SolveOne(IInputProvider inputProvider) => GetRuckSacks(inputProvider).Sum(x => x.Priority);
+    public string SolveOne(IInputProvider inputProvider) => GetRuckSacks(inputProvider).Sum(x => x.Priority).ToString();
 
     public List<ElfGroup> ElfGroups(IInputProvider inputProvider)
     {
@@ -20,6 +20,6 @@ public class Day03 : IDay
             return elfGroups;
     }
 
-    public int SolveTwo(IInputProvider inputProvider) => ElfGroups(inputProvider).Sum(x => x.BadgeTotal);
+    public string SolveTwo(IInputProvider inputProvider) => ElfGroups(inputProvider).Sum(x => x.BadgeTotal).ToString();
 
 }

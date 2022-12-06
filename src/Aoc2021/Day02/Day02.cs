@@ -2,7 +2,7 @@
 
 public class Day02 : IDay
 {
-    public int SolveOne(IInputProvider inputProvider)
+    public string SolveOne(IInputProvider inputProvider)
     {
         IEnumerable<KeyValuePair<string, int>> lines = inputProvider.Read().Select(line =>
         {
@@ -28,10 +28,10 @@ public class Day02 : IDay
                     break;
             }
         }
-        return x*y;
+        return $"{x*y}";
     }
 
-    public int SolveTwo(IInputProvider inputProvider)
+    public string SolveTwo(IInputProvider inputProvider)
     {
         IEnumerable<KeyValuePair<string, int>> lines = inputProvider.Read().Select(line =>
         {
@@ -60,6 +60,6 @@ public class Day02 : IDay
                     break;
             }
         }
-        return x*y;
+        return $"{x*y}";
     }
 }

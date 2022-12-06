@@ -23,8 +23,8 @@ public class Day04Test : BaseTest<Day04>
                 "6-6,4-6",
                 "2-6,4-8"
             });
-            int actual = Sut.SolveOne(InputProvider.Object);
-            actual.Should().Be(2);
+            string actual = Sut.SolveOne(InputProvider.Object);
+            actual.Should().Be("2");
         }
     }
 
@@ -40,8 +40,8 @@ public class Day04Test : BaseTest<Day04>
                 "6-6,4-6",
                 "2-6,4-8"
             });
-            int actual = Sut.SolveTwo(InputProvider.Object);
-            actual.Should().Be(4);
+            string actual = Sut.SolveTwo(InputProvider.Object);
+            actual.Should().Be("4");
         }
     }
 
