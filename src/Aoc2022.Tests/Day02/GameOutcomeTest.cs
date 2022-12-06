@@ -10,7 +10,7 @@ public class GameOutcomeTest
     [InlineData('Z', RpsOutcome.Win)]
     public void ShouldParseOutcome(char alias, RpsOutcome outcome)
     {
-        GameThrowOutcome actual = new (alias);
+        GameThrowOutcome actual = new(alias);
         actual.Outcome.Should().Be(outcome);
     }
 }

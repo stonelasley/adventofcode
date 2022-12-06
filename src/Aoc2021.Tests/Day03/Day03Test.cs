@@ -45,8 +45,8 @@ public class Day03Test : BaseTest<Day03>
         public void ShouldSolve()
         {
             InputProvider
-               .Setup(x => x.Read())
-               .Returns(
+                .Setup(x => x.Read())
+                .Returns(
                     new[]
                     {
                         "00100",

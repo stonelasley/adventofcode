@@ -23,7 +23,7 @@ public class Day04Test : BaseTest<Day04>
                 "6-6,4-6",
                 "2-6,4-8"
             });
-            string actual = Sut.SolveOne(InputProvider.Object);
+            var actual = Sut.SolveOne(InputProvider.Object);
             actual.Should().Be("2");
         }
     }
@@ -40,7 +40,7 @@ public class Day04Test : BaseTest<Day04>
                 "6-6,4-6",
                 "2-6,4-8"
             });
-            string actual = Sut.SolveTwo(InputProvider.Object);
+            var actual = Sut.SolveTwo(InputProvider.Object);
             actual.Should().Be("4");
         }
     }
@@ -56,7 +56,7 @@ public class Day04Test : BaseTest<Day04>
                 "2-3,4-5",
                 "5-7,7-9"
             });
-            List<ElfTeam> actual = Sut.GetElfTeams(InputProvider.Object);
+            var actual = Sut.GetElfTeams(InputProvider.Object);
             actual.Count.Should().Be(3);
         }
     }

@@ -1,10 +1,12 @@
 namespace Aoc2021.Tests.Day05;
 
-public class Day05Test : BaseTest<Aoc2021.Day05.Day05>
+using Aoc2021.Day05;
+
+public class Day05Test : BaseTest<Day05>
 {
     public Day05Test()
     {
-        Sut = new Aoc2021.Day05.Day05();
+        Sut = new Day05();
     }
 
     public class SolveOne : Day05Test
@@ -30,7 +32,7 @@ public class Day05Test : BaseTest<Aoc2021.Day05.Day05>
                     }
                 );
 
-            string actual = Sut.SolveOne(InputProvider.Object);
+            var actual = Sut.SolveOne(InputProvider.Object);
             actual.Should().Be("5");
         }
     }
@@ -40,12 +42,9 @@ public class Day05Test : BaseTest<Aoc2021.Day05.Day05>
         // [Fact]
         public void ShouldSolve()
         {
-            InputProvider.Setup(x => x.Read()).Returns(new[]
-            {
-                ""
-            });
+            InputProvider.Setup(x => x.Read()).Returns(new[] { "" });
 
-            string actual = Sut.SolveTwo(InputProvider.Object);
+            var actual = Sut.SolveTwo(InputProvider.Object);
             actual.Should().Be("1");
         }
     }

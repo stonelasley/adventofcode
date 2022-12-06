@@ -1,6 +1,6 @@
-using Aoc2021.Day05;
-
 namespace Aoc2021.Tests.Day05;
+
+using Aoc2021.Day05;
 
 public class MapTest : BaseTest<Map>
 {
@@ -8,23 +8,19 @@ public class MapTest : BaseTest<Map>
     [InlineData("5,5 -> 5,2", 5)]
     public void ShouldInstantiatePlot(string inputLine, int dims)
     {
-        InputProvider
-            .Setup(x => x.Read())
-            .Returns(new[] {inputLine});
+        InputProvider.Setup(x => x.Read()).Returns(new[] { inputLine });
 
         var actual = new Map(InputProvider.Object);
 
         for (var i = 0; i < dims; i++)
-        for (var j = 0; j < dims; j++)
-            actual.Plot[i, j].Should().Be(0);
+            for (var j = 0; j < dims; j++)
+                actual.Plot[i, j].Should().Be(0);
     }
 
     [Fact]
     public void ShouldPlotLine()
     {
-        InputProvider
-            .Setup(x => x.Read())
-            .Returns(new[] {"2,2 -> 0,2 "});
+        InputProvider.Setup(x => x.Read()).Returns(new[] { "2,2 -> 0,2 " });
 
         Map actual = new(InputProvider.Object);
         actual.Plot[0, 0].Should().Be(0);

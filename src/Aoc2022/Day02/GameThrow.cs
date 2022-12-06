@@ -3,6 +3,23 @@ namespace Aoc2022.Day02;
 public class GameThrow
 {
     private readonly char _alias;
+
+    public GameThrow(char alias)
+    {
+        _alias = alias;
+    }
+
+    public GameThrow(RpsShape shape)
+    {
+        _alias = shape switch
+        {
+            RpsShape.Rock => 'A',
+            RpsShape.Paper => 'B',
+            RpsShape.Scissors => 'C',
+            _ => throw new ArgumentOutOfRangeException(nameof(shape), shape, null)
+        };
+    }
+
     public RpsShape Shape =>
         _alias switch
         {
@@ -55,21 +72,5 @@ public class GameThrow
             default:
                 throw new ArgumentOutOfRangeException(nameof(outcome), outcome, null);
         }
-    }
-
-    public GameThrow(char alias)
-    {
-        _alias = alias;
-    }
-
-    public GameThrow(RpsShape shape)
-    {
-        _alias = shape switch
-        {
-            RpsShape.Rock => 'A',
-            RpsShape.Paper => 'B',
-            RpsShape.Scissors => 'C',
-            _ => throw new ArgumentOutOfRangeException(nameof(shape), shape, null)
-        };
     }
 }

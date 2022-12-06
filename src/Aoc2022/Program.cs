@@ -1,1 +1,3 @@
-﻿Runner.Run(System.Reflection.Assembly.GetExecutingAssembly(), 4);
+﻿using System.Reflection;
+
+Runner.Run(Assembly.GetExecutingAssembly(), 4);

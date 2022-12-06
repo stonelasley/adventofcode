@@ -7,16 +7,16 @@ public class GameTest
     [Fact]
     public void ShouldCalculateScore()
     {
-        string[] roundInput = new[] { "A Y", "B X", "C Z" };
-        Game actual = new (roundInput);
+        string[] roundInput = {"A Y", "B X", "C Z"};
+        Game actual = new(roundInput);
         actual.Score.Should().Be(15);
     }
-    
+
     [Fact]
     public void ShouldCalculateAlternateScore()
     {
-        string[] roundInput = new[] { "A Y", "B X", "C Z" };
-        Game actual = new (roundInput);
+        string[] roundInput = {"A Y", "B X", "C Z"};
+        Game actual = new(roundInput);
         actual.ScoreTwo.Should().Be(12);
     }
 }

@@ -1,6 +1,6 @@
-using Aoc2022.Day05;
-
 namespace Aoc2022.Tests.Day05;
+
+using Aoc2022.Day05;
 
 public class CrateLineTest
 {

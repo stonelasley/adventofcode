@@ -30,19 +30,11 @@ public class Day01Test : BaseTest<Day01>
         [Fact]
         public void ShouldSolve()
         {
-            InputProvider.Setup(x => x.Read()).Returns(new []
-            {
-                "199",
-                "200",
-                "208",
-                "210",
-                "200",
-                "207",
-                "240",
-                "269",
-                "260",
-                "263"
-            });
+            InputProvider
+                .Setup(x => x.Read())
+                .Returns(
+                    new[] { "199", "200", "208", "210", "200", "207", "240", "269", "260", "263" }
+                );
 
             var actual = Sut.SolveTwo(InputProvider.Object);
             actual.Should().Be("5");

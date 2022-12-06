@@ -2,7 +2,7 @@ namespace Aoc2022.Day02;
 
 public class GameThrowOutcome
 {
-    private char _alias;
+    private readonly char _alias;
 
     public GameThrowOutcome(char alias)
     {

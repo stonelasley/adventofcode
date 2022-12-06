@@ -1,7 +1,7 @@
+namespace Aoc2021.Tests.Day05;
+
 using System.Drawing;
 using Aoc2021.Day05;
-
-namespace Aoc2021.Tests.Day05;
 
 public class LineTest : BaseTest<Line>
 {
@@ -15,7 +15,6 @@ public class LineTest : BaseTest<Line>
         actual.End.X.Should().Be(8);
         actual.End.Y.Should().Be(2);
     }
-
 
     [Theory]
     [InlineData("5,5 -> 8,2", 8, 5)]
@@ -61,7 +60,12 @@ public class LineTest : BaseTest<Line>
         [InlineData("5,5 -> 8,2", 8, 2, true)]
         [InlineData("0,9 -> 9,9", 8, 9, true)]
         [InlineData("5,5 -> 8,2", 0, 0, false)]
-        public void ShouldCalculatePointOnLine(string inputLine, int pointX, int pointY, bool isOnLine)
+        public void ShouldCalculatePointOnLine(
+            string inputLine,
+            int pointX,
+            int pointY,
+            bool isOnLine
+        )
         {
             Point p = new(pointX, pointY);
 

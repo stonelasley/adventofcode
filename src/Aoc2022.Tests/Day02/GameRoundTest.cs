@@ -10,7 +10,7 @@ public class GameRoundTest
     [InlineData('C', 'Z', false)]
     public void ShouldCompareShapes(char theirAlias, char myAlias, bool expected)
     {
-        GameRound actual = new (myAlias, theirAlias);
+        GameRound actual = new(myAlias, theirAlias);
 
         actual.Won.Should().Be(expected);
     }
@@ -23,7 +23,7 @@ public class GameRoundTest
     [InlineData('A', 'Z', false)]
     public void ShoulDetermineDraw(char theirAlias, char myAlias, bool expected)
     {
-        GameRound actual = new (myAlias, theirAlias);
+        GameRound actual = new(myAlias, theirAlias);
 
         actual.Draw.Should().Be(expected);
     }
@@ -34,7 +34,7 @@ public class GameRoundTest
     [InlineData('C', 'Z', 6)]
     public void ShouldCalculateScore(char theirAlias, char myAlias, int expectedScore)
     {
-        GameRound actual = new (myAlias, theirAlias);
+        GameRound actual = new(myAlias, theirAlias);
 
         actual.Score.Should().Be(expectedScore);
     }

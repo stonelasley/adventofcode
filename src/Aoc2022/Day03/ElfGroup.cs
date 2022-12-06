@@ -8,16 +8,18 @@ public class ElfGroup
     {
         _ruckSacks = ruckSacks;
     }
-    
+
     public int BadgeTotal
     {
         get
         {
-            var badge = _ruckSacks.First().Contents.Intersect(_ruckSacks.Skip(1).Take(1).First().Contents)
-                .Intersect(_ruckSacks.Last().Contents).First();
+            var badge = _ruckSacks
+                .First()
+                .Contents.Intersect(_ruckSacks.Skip(1).Take(1).First().Contents)
+                .Intersect(_ruckSacks.Last().Contents)
+                .First();
 
             return badge.Priority();
         }
-
-    } 
+    }
 }

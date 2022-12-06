@@ -6,10 +6,10 @@ public class Day04 : IDay
     {
         IEnumerable<string> fileInput = inputProvider.Read();
 
-        int[] bingoCalls = fileInput.First().Split(',').Select(int.Parse).ToArray();
-        string[] boardInput = fileInput.Skip(2).ToArray();
+        var bingoCalls = fileInput.First().Split(',').Select(int.Parse).ToArray();
+        var boardInput = fileInput.Skip(2).ToArray();
 
-        List<Board> bingoBoards = BingoGame.Setup(boardInput);
+        var bingoBoards = BingoGame.Setup(boardInput);
 
         return BingoGame.GetWinningBoardScore(bingoCalls, bingoBoards).ToString();
     }
@@ -18,13 +18,12 @@ public class Day04 : IDay
     {
         IEnumerable<string> fileInput = inputProvider.Read();
 
-        int[] bingoCalls = fileInput.First().Split(',').Select(int.Parse).ToArray();
-        string[] boardInput = fileInput.Skip(2).ToArray();
+        var bingoCalls = fileInput.First().Split(',').Select(int.Parse).ToArray();
+        var boardInput = fileInput.Skip(2).ToArray();
 
-        List<Board> bingoBoards = BingoGame.Setup(boardInput);
+        var bingoBoards = BingoGame.Setup(boardInput);
 
         return BingoGame.GetLosingBoard(bingoCalls, bingoBoards).ToString();
-
     }
 }
 
@@ -32,11 +31,11 @@ public class BingoGame
 {
     public static List<Board> Setup(IEnumerable<string> boardInput)
     {
-        int boardDelimiterCount = boardInput.Count(x => x == string.Empty);
+        var boardDelimiterCount = boardInput.Count(x => x == string.Empty);
         List<Board> result = new();
-        for (int i = 0; i <= boardDelimiterCount; i++)
+        for (var i = 0; i <= boardDelimiterCount; i++)
         {
-            IEnumerable<string> boardLines = boardInput.Skip((i * 5) + i).Take(5);
+            var boardLines = boardInput.Skip(i * 5 + i).Take(5);
             result.Add(new Board(boardLines));
         }
 
@@ -45,10 +44,10 @@ public class BingoGame
 
     public static int GetWinningBoardScore(int[] calls, List<Board> boards)
     {
-        foreach (int number in calls)
+        foreach (var number in calls)
         {
             boards.ForEach(x => x.BingoCall(number));
-            Board? winningBoard = boards.FirstOrDefault(x => x.HasWon);
+            var winningBoard = boards.FirstOrDefault(x => x.HasWon);
             if (winningBoard != null)
             {
                 var total = winningBoard.Total;
@@ -58,33 +57,28 @@ public class BingoGame
 
         return -1;
     }
+
     public static int GetLosingBoard(int[] calls, List<Board> boards)
     {
         Board? lastBoard = null;
-    
+
         List<Board> playableBoards = new(boards);
-    
-        foreach (int number in calls)
-        {
+
+        foreach (var number in calls)
             if (lastBoard != null)
             {
                 lastBoard.BingoCall(number);
                 if (lastBoard.HasWon)
-                {
                     return number * lastBoard.Total;
-                }
             }
             else
             {
                 playableBoards.ForEach(board => board.BingoCall(number));
                 playableBoards = playableBoards.Where(x => !x.HasWon).ToList();
                 if (playableBoards.Count() == 1)
-                {
                     lastBoard = playableBoards.First();
-                }
             }
-        }
-    
+
         return -1;
     }
 }
@@ -93,27 +87,14 @@ public class Board
 {
     public Board(IEnumerable<string> rows)
     {
-        Rows = rows.Select(x => x
-                .Split(' ')
-                .Where(x => x != string.Empty)
-                .Select(x => new BoardCell(x))
-                .ToList()
+        Rows = rows.Select(
+                x =>
+                    x.Split(' ')
+                        .Where(x => x != string.Empty)
+                        .Select(x => new BoardCell(x))
+                        .ToList()
             )
             .ToList();
-    }
-
-    public void BingoCall(int number)
-    {
-        foreach (var row in Rows)
-        {
-            foreach (var cell in row)
-            {
-                if (cell.Number == number)
-                {
-                    cell.Called = true;
-                }
-            }
-        }
     }
 
     public bool HasWon => HasWinningRow || HasWinningColumn;
@@ -127,13 +108,11 @@ public class Board
     {
         get
         {
-            for (int i = 0; i < ColumnCount; i++)
+            for (var i = 0; i < ColumnCount; i++)
             {
-                bool b = Rows.Select(x => x[i]).All(x => x.Called);
+                var b = Rows.Select(x => x[i]).All(x => x.Called);
                 if (b)
-                {
                     return true;
-                }
             }
 
             return false;
@@ -141,13 +120,21 @@ public class Board
     }
 
     private int ColumnCount => Rows.FirstOrDefault()?.Count ?? 0;
+
+    public void BingoCall(int number)
+    {
+        foreach (var row in Rows)
+            foreach (var cell in row)
+                if (cell.Number == number)
+                    cell.Called = true;
+    }
 }
 
 public class BoardCell
 {
     public BoardCell(string number)
     {
-        Number = Int32.Parse(number);
+        Number = int.Parse(number);
     }
 
     public int Number { get; set; }

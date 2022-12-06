@@ -17,15 +17,7 @@ public class Day02Test : BaseTest<Day02>
             InputProvider
                 .Setup(x => x.Read())
                 .Returns(
-                    new[]
-                    {
-                        "forward 5",
-                        "down 5",
-                        "forward 8",
-                        "up 3",
-                        "down 8",
-                        "forward 2"
-                    }
+                    new[] { "forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2" }
                 );
 
             var actual = Sut.SolveOne(InputProvider.Object);
@@ -39,17 +31,9 @@ public class Day02Test : BaseTest<Day02>
         public void ShouldSolve()
         {
             InputProvider
-               .Setup(x => x.Read())
-               .Returns(
-                    new[]
-                    {
-                        "forward 5",
-                        "down 5",
-                        "forward 8",
-                        "up 3",
-                        "down 8",
-                        "forward 2"
-                    }
+                .Setup(x => x.Read())
+                .Returns(
+                    new[] { "forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2" }
                 );
 
             var actual = Sut.SolveTwo(InputProvider.Object);

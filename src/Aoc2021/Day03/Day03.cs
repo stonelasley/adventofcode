@@ -5,18 +5,19 @@ public class Day03 : IDay
     public string SolveOne(IInputProvider inputProvider)
     {
         IEnumerable<char[]> lines = inputProvider.Read().Select(x => x.ToCharArray()).ToList();
-        string[] rows = new string[lines.First().Length];
+        var rows = new string[lines.First().Length];
 
         // Flip Array
-        int i = 0;
+        var i = 0;
         foreach (var digits in lines)
         {
-            int j = 0;
+            var j = 0;
             foreach (var digit in digits)
             {
                 rows[j] += digit;
                 j++;
             }
+
             i++;
         }
 
@@ -24,8 +25,8 @@ public class Day03 : IDay
         var epsilon = "";
         foreach (var row in rows)
         {
-            int ones = row.ToCharArray().Count(x => x == '1');
-            int zeros = row.ToCharArray().Count(x => x == '0');
+            var ones = row.ToCharArray().Count(x => x == '1');
+            var zeros = row.ToCharArray().Count(x => x == '0');
             if (ones > zeros)
             {
                 gamma += "1";
@@ -49,82 +50,86 @@ public class Day03 : IDay
         IEnumerable<string> lines = inputProvider.Read().ToList();
         IList<char[]> lineArrays = lines.Select(_ => _.ToCharArray()).ToList();
 
-        int co2Rating = GetCo2Rating(lineArrays);
-        int o2Rating = GetO2Rating(lineArrays);
+        var co2Rating = GetCo2Rating(lineArrays);
+        var o2Rating = GetO2Rating(lineArrays);
 
-        // Console.WriteLine($"OXYGEN GENERATOR RATING: {o2Rating}");
-        //Console.WriteLine($"CO2 SCRUBBER RATING: {co2Rating}");
-        //Console.WriteLine($"LIFE SUPPORT RATING: {o2Rating * co2Rating}");
         return $"{o2Rating * co2Rating}";
     }
-    
-    static int GetO2Rating(IList<char[]> lines)
+
+    private static int GetO2Rating(IList<char[]> lines)
     {
         List<char[]> bitBuffer = new(lines);
-        int i = 0;
+        var i = 0;
         while (bitBuffer.Count > 1)
         {
-            string[] bitsByIndex = RotateBits(bitBuffer);
-            string bitsAtIndex = bitsByIndex[i];
+            var bitsByIndex = RotateBits(bitBuffer);
+            var bitsAtIndex = bitsByIndex[i];
 
-            Tuple<int, int> bitCountByState = GetBitCountByState(bitsAtIndex);
+            var bitCountByState = GetBitCountByState(bitsAtIndex);
 
-            char targetState = (bitCountByState.Item1 >= bitCountByState.Item2) ? '1' : '0';
+            var targetState = bitCountByState.Item1 >= bitCountByState.Item2 ? '1' : '0';
 
             bitBuffer = GetLinesByIndexState(targetState, i, bitBuffer);
             i++;
         }
 
-        char[] number = bitBuffer.First();
-        return Convert.ToInt32(new String(number), 2);
+        var number = bitBuffer.First();
+        return Convert.ToInt32(new string(number), 2);
     }
 
-    static int GetCo2Rating(IList<char[]> lines)
+    private static int GetCo2Rating(IList<char[]> lines)
     {
         List<char[]> bitBuffer = new(lines);
-        int i = 0;
+        var i = 0;
         while (bitBuffer.Count > 1)
         {
-            string[] bitsByIndex = RotateBits(bitBuffer);
-            string bitsAtIndex = bitsByIndex[i];
+            var bitsByIndex = RotateBits(bitBuffer);
+            var bitsAtIndex = bitsByIndex[i];
 
-            Tuple<int, int> bitCountByState = GetBitCountByState(bitsAtIndex);
+            var bitCountByState = GetBitCountByState(bitsAtIndex);
 
-            char targetState = (bitCountByState.Item1 >= bitCountByState.Item2) ? '0' : '1';
+            var targetState = bitCountByState.Item1 >= bitCountByState.Item2 ? '0' : '1';
 
             bitBuffer = GetLinesByIndexState(targetState, i, bitBuffer);
             i++;
         }
 
-        char[] number = bitBuffer.First();
-        return Convert.ToInt32(new String(number), 2);
+        var number = bitBuffer.First();
+        return Convert.ToInt32(new string(number), 2);
     }
 
-    static Tuple<int, int> GetBitCountByState(string bitsAtIndex)
+    private static Tuple<int, int> GetBitCountByState(string bitsAtIndex)
     {
-        int onCount = bitsAtIndex.Count(x => x == '1');
-        int offCount = bitsAtIndex.Count() - onCount;
+        var onCount = bitsAtIndex.Count(x => x == '1');
+        var offCount = bitsAtIndex.Count() - onCount;
         return new Tuple<int, int>(onCount, offCount);
     }
 
-    static string[] RotateBits(IEnumerable<char[]> bitLine)
+    private static string[] RotateBits(IEnumerable<char[]> bitLine)
     {
-        string[] rows = new string[bitLine.First().Length];
-        int i = 0;
+        var rows = new string[bitLine.First().Length];
+        var i = 0;
         foreach (var digits in bitLine)
         {
-            int j = 0;
+            var j = 0;
             foreach (var digit in digits)
             {
                 rows[j] += digit;
                 j++;
             }
+
             i++;
         }
 
         return rows;
     }
 
-    static List<char[]> GetLinesByIndexState(char bit, int index, IEnumerable<char[]> buffer) =>
-        buffer.Where(x => x[index] == bit).ToList();
+    private static List<char[]> GetLinesByIndexState(
+        char bit,
+        int index,
+        IEnumerable<char[]> buffer
+    )
+    {
+        return buffer.Where(x => x[index] == bit).ToList();
+    }
 }

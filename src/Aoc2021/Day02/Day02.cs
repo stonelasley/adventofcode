@@ -4,17 +4,18 @@ public class Day02 : IDay
 {
     public string SolveOne(IInputProvider inputProvider)
     {
-        IEnumerable<KeyValuePair<string, int>> lines = inputProvider.Read().Select(line =>
-        {
-            var pair = line.Split(' ');
-            return new KeyValuePair<string, int>(pair[0], Int32.Parse(pair[1]));
-        });
+        var lines = inputProvider
+            .Read()
+            .Select(line =>
+            {
+                var pair = line.Split(' ');
+                return new KeyValuePair<string, int>(pair[0], int.Parse(pair[1]));
+            });
 
-        int x = 0;
-        int y = 0;
+        var x = 0;
+        var y = 0;
 
         foreach (var kvp in lines)
-        {
             switch (kvp.Key)
             {
                 case "up":
@@ -27,25 +28,25 @@ public class Day02 : IDay
                     x += kvp.Value;
                     break;
             }
-        }
-        return $"{x*y}";
+
+        return $"{x * y}";
     }
 
     public string SolveTwo(IInputProvider inputProvider)
     {
-        IEnumerable<KeyValuePair<string, int>> lines = inputProvider.Read().Select(line =>
-        {
-            var pair = line.Split(' ');
-            return new KeyValuePair<string, int>(pair[0], Int32.Parse(pair[1]));
-        });
+        var lines = inputProvider
+            .Read()
+            .Select(line =>
+            {
+                var pair = line.Split(' ');
+                return new KeyValuePair<string, int>(pair[0], int.Parse(pair[1]));
+            });
 
-        int x = 0;
-        int y = 0;
-        int aim = 0;
-
+        var x = 0;
+        var y = 0;
+        var aim = 0;
 
         foreach (var kvp in lines)
-        {
             switch (kvp.Key)
             {
                 case "up":
@@ -59,7 +60,7 @@ public class Day02 : IDay
                     y += aim * kvp.Value;
                     break;
             }
-        }
-        return $"{x*y}";
+
+        return $"{x * y}";
     }
 }

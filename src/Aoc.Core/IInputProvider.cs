@@ -14,9 +14,14 @@ public class InputReader : IInputProvider
     {
         _directory = directory;
     }
-    public string[] Read() =>
-        File.ReadLines($"{_directory}/input.txt").ToArray();
 
-    public string ReadAllText() =>
-        File.ReadAllText($"{_directory}/input.txt").Trim();
+    public string[] Read()
+    {
+        return File.ReadLines($"{_directory}/input.txt").ToArray();
+    }
+
+    public string ReadAllText()
+    {
+        return File.ReadAllText($"{_directory}/input.txt").Trim();
+    }
 }

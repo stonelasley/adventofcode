@@ -1,18 +1,17 @@
 namespace Aoc2022.Day05;
 
-public class CrateState
+public class CrateManager
 {
-    private const int StackSize = 9999;
-
-    public CrateState(string stackCountLine)
+    public CrateManager(string stackCountLine)
     {
         Stacks = stackCountLine
-            .Split(' ').Where(x => !string.IsNullOrWhiteSpace(x))
-            .Select(x => new Stack<char>(StackSize))
+            .Split(' ')
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Select(x => new Stack<char>())
             .ToList();
     }
 
-    public List<Stack<char>> Stacks { get; }
+    public List<Stack<char>> Stacks { get; } = new();
 
     public void Initialize(List<CrateLocationLine> initialState)
     {
@@ -32,11 +31,12 @@ public class CrateState
             destinationStack.Push(crateToMove);
         }
     }
+
     public void ProcessBatchTransfer(TransferInstruction instruction)
     {
-        Stack<char> tempStack = new ();
         var currentStack = Stacks.ElementAt(instruction.StartPosition - 1);
         var destinationStack = Stacks.ElementAt(instruction.Destination - 1);
+        Stack<char> tempStack = new();
         for (var i = 0; i < instruction.CrateNumber; i++)
         {
             var crateToMove = currentStack.Pop();
@@ -45,8 +45,17 @@ public class CrateState
 
         while (tempStack.Count > 0)
         {
-            char crate = tempStack.Pop();
+            var crate = tempStack.Pop();
             destinationStack.Push(crate);
         }
-   }
+    }
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        foreach (var stack in Stacks)
+            sb.Append(stack.Peek().ToString());
+
+        return sb.ToString();
+    }
 }

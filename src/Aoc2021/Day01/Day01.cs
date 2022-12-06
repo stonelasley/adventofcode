@@ -4,15 +4,13 @@ public class Day01 : IDay
 {
     public string SolveOne(IInputProvider inputProvider)
     {
-        int previous = int.MaxValue;
-        int total = 0;
+        var previous = int.MaxValue;
+        var total = 0;
         foreach (var line in inputProvider.Read())
         {
-            int current = int.Parse(line);
+            var current = int.Parse(line);
             if (current > previous)
-            {
                 total += 1;
-            }
 
             previous = current;
         }
@@ -22,22 +20,21 @@ public class Day01 : IDay
 
     public string SolveTwo(IInputProvider inputProvider)
     {
-        int[] lines = inputProvider.Read().Select(int.Parse).ToArray();
+        var lines = inputProvider.Read().Select(int.Parse).ToArray();
 
-        int previous = int.MaxValue;
-        int total = 0;
+        var previous = int.MaxValue;
+        var total = 0;
         var iMax = lines.Count() - 3;
 
-        for (int i = 0; i <= iMax; i++) {
-    
-            int currentWindow = lines[i] + lines[i+1] + lines[i+2];
+        for (var i = 0; i <= iMax; i++)
+        {
+            var currentWindow = lines[i] + lines[i + 1] + lines[i + 2];
             if (currentWindow > previous)
-            {
                 total += 1;
-            }
 
             previous = currentWindow;
         }
+
         return total.ToString();
     }
 }

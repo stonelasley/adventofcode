@@ -13,7 +13,7 @@ public class GameThrowTest
     [InlineData('Z', 3, RpsShape.Scissors)]
     public void ShouldInstantiate(char alias, int score, RpsShape shape)
     {
-        GameThrow actual = new (alias);
+        GameThrow actual = new(alias);
         actual.Score.Should().Be(score);
         actual.Shape.Should().Be(shape);
     }
@@ -28,9 +28,9 @@ public class GameThrowTest
         RpsShape shape
     )
     {
-        GameThrow rpsThrow = new (shapeAlias);
-        GameThrowOutcome outcome = new (outcomeAlias);
-        RpsShape actual = rpsThrow.CounterShapeByOutcome(outcome.Outcome);
+        GameThrow rpsThrow = new(shapeAlias);
+        GameThrowOutcome outcome = new(outcomeAlias);
+        var actual = rpsThrow.CounterShapeByOutcome(outcome.Outcome);
 
         actual.Should().Be(shape);
     }

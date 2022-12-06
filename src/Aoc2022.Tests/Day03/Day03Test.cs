@@ -28,7 +28,6 @@ public class Day03Test : BaseTest<Day03>
         [Fact]
         public void ShouldSumRuckSacks()
         {
-
             InputProvider.Setup(x => x.Read())
                 .Returns(new[]
                 {
@@ -43,7 +42,7 @@ public class Day03Test : BaseTest<Day03>
             var actual = Sut.SolveOne(InputProvider.Object);
             actual.Should().Be("157");
         }
-        
+
         [Fact]
         public void ShouldFindBadge()
         {
@@ -62,6 +61,4 @@ public class Day03Test : BaseTest<Day03>
             actual.Should().Be("70");
         }
     }
-
-   
 }
