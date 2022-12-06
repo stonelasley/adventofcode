@@ -16,7 +16,10 @@ public class Day01 : IDay
     {
         var input = inputProvider.ReadAllText();
         return input
-            .Split($"{Environment.NewLine}{Environment.NewLine}")
-            .Select(x => x.Trim().Split(Environment.NewLine).Select(int.Parse).Sum());
+            .Split(
+                $"{Environment.NewLine}{Environment.NewLine}",
+                StringSplitOptions.RemoveEmptyEntries
+            )
+            .Select(x => x.Split(Environment.NewLine).Select(int.Parse).Sum());
     }
 }
