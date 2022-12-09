@@ -20,7 +20,7 @@ public class Day08Test : BaseTest<Day08>
         actual.Should().Be("21");
     }
 
-    //[Fact]
+    [Fact]
     public void ShouldSolveTwo()
     {
         InputProvider
@@ -28,31 +28,26 @@ public class Day08Test : BaseTest<Day08>
             .Returns(new[] { "30373", "25512", "65332", "33549", "35390" });
 
         var actual = Sut.SolveTwo(InputProvider.Object);
-        actual.Should().Be("-1");
+        actual.Should().Be("8");
     }
 }
 
-public class TreePatchCounterTest : BaseTest<TreePatchCounter>
+public class TreePatchCounterTest
 {
-    public TreePatchCounterTest()
-    {
-        Sut = new TreePatchCounter();
-    }
+    List<List<int>> Input =
+        new()
+        {
+            new() { 3, 0, 3, 7, 3 },
+            new() { 2, 5, 5, 1, 2 },
+            new() { 6, 5, 3, 3, 2 },
+            new() { 3, 3, 5, 4, 9 },
+            new() { 3, 5, 3, 9, 0 }
+        };
 
     [Fact]
     public void ShouldCountPerimiter()
     {
-        List<List<int>> input =
-            new()
-            {
-                new() { 3, 0, 3, 7, 3 },
-                new() { 2, 5, 5, 1, 2 },
-                new() { 6, 5, 3, 3, 2 },
-                new() { 3, 3, 5, 4, 9 },
-                new() { 3, 5, 3, 9, 0 }
-            };
-
-        var actual = Sut.CountPerimiter(input);
+        var actual = TreeCounter.CountPerimiter(Input);
         actual.Should().Be(16);
     }
 
@@ -64,18 +59,8 @@ public class TreePatchCounterTest : BaseTest<TreePatchCounter>
     [InlineData(3, 3, false)]
     public void ShouldDetermineVisibilityFromLeft(int x, int y, bool expectedVisibility)
     {
-        List<List<int>> input =
-            new()
-            {
-                new() { 3, 0, 3, 7, 3 },
-                new() { 2, 5, 5, 1, 2 },
-                new() { 6, 5, 3, 3, 2 },
-                new() { 3, 3, 5, 4, 9 },
-                new() { 3, 5, 3, 9, 0 }
-            };
-
-        var height = input.ElementAt(y).ElementAt(x);
-        var actual = Sut.VisibleFromLeft(input, height, x, y);
+        var height = Input.ElementAt(y).ElementAt(x);
+        var actual = TreeCounter.IsVisibleFromLeft(Input, height, x, y);
         actual.Should().Be(expectedVisibility);
     }
 
@@ -86,18 +71,8 @@ public class TreePatchCounterTest : BaseTest<TreePatchCounter>
     [InlineData(0, 2, true)] // 6
     public void ShouldDetermineVisibilityFromRight(int x, int y, bool expectedVisibility)
     {
-        List<List<int>> input =
-            new()
-            {
-                new() { 3, 0, 3, 7, 3 },
-                new() { 2, 5, 5, 1, 2 },
-                new() { 6, 5, 3, 3, 2 },
-                new() { 3, 3, 5, 4, 9 },
-                new() { 3, 5, 3, 9, 0 }
-            };
-
-        var height = input.ElementAt(y).ElementAt(x);
-        var actual = Sut.VisibleFromRight(input, height, x, y);
+        var height = Input.ElementAt(y).ElementAt(x);
+        var actual = TreeCounter.IsVisibleFromRight(Input, height, x, y);
         actual.Should().Be(expectedVisibility);
     }
 
@@ -110,18 +85,8 @@ public class TreePatchCounterTest : BaseTest<TreePatchCounter>
     [InlineData(4, 3, true)] // 9
     public void ShouldDetermineVisibilityFromTop(int x, int y, bool expectedVisibility)
     {
-        List<List<int>> input =
-            new()
-            {
-                new() { 3, 0, 3, 7, 3 },
-                new() { 2, 5, 5, 1, 2 },
-                new() { 6, 5, 3, 3, 2 },
-                new() { 3, 3, 5, 4, 9 },
-                new() { 3, 5, 3, 9, 0 }
-            };
-
-        var height = input.ElementAt(y).ElementAt(x);
-        var actual = Sut.VisibleFromTop(input, height, x, y);
+        var height = Input.ElementAt(y).ElementAt(x);
+        var actual = TreeCounter.IsVisibleFromTop(Input, height, x, y);
         actual.Should().Be(expectedVisibility);
     }
 
@@ -132,18 +97,58 @@ public class TreePatchCounterTest : BaseTest<TreePatchCounter>
     [InlineData(4, 3, true)] // 9
     public void ShouldDetermineVisibilityFromBottom(int x, int y, bool expectedVisibility)
     {
-        List<List<int>> input =
-            new()
-            {
-                new() { 3, 0, 3, 7, 3 },
-                new() { 2, 5, 5, 1, 2 },
-                new() { 6, 5, 3, 3, 2 },
-                new() { 3, 3, 5, 4, 9 },
-                new() { 3, 5, 3, 9, 0 }
-            };
-
-        var height = input.ElementAt(y).ElementAt(x);
-        var actual = Sut.VisibleFromBottom(input, height, x, y);
+        var height = Input.ElementAt(y).ElementAt(x);
+        var actual = TreeCounter.IsVisibleFromBottom(Input, height, x, y);
         actual.Should().Be(expectedVisibility);
+    }
+
+    [Theory]
+    [InlineData(1, 1, 1)]
+    [InlineData(3, 4, 3)]
+    [InlineData(2, 2, 1)]
+    [InlineData(3, 3, 1)]
+    public void ShouldDetermineScenicScoreFromLeft(int x, int y, int score)
+    {
+        var height = Input.ElementAt(y).ElementAt(x);
+        var actual = TreeCounter.LeftScore(Input, height, x, y);
+        actual.Should().Be(score);
+    }
+
+    [Theory]
+    [InlineData(1, 1, 1)]
+    [InlineData(1, 2, 3)]
+    [InlineData(2, 2, 1)]
+    [InlineData(3, 3, 1)]
+    [InlineData(3, 0, 1)]
+    [InlineData(3, 4, 1)]
+    public void ShouldDetermineScenicScoreFromRight(int x, int y, int score)
+    {
+        var height = Input.ElementAt(y).ElementAt(x);
+        var actual = TreeCounter.ScoreRight(Input, height, x, y);
+        actual.Should().Be(score);
+    }
+
+    [Theory]
+    [InlineData(1, 1, 1)]
+    [InlineData(3, 4, 4)]
+    [InlineData(0, 2, 2)]
+    [InlineData(1, 2, 1)]
+    public void ShouldDetermineScenicScoreFromTop(int x, int y, int score)
+    {
+        var height = Input.ElementAt(y).ElementAt(x);
+        var actual = TreeCounter.TopScore(Input, height, x, y);
+        actual.Should().Be(score);
+    }
+
+    [Theory]
+    [InlineData(1, 1, 1)]
+    [InlineData(3, 3, 1)]
+    [InlineData(0, 2, 2)]
+    [InlineData(3, 0, 4)]
+    public void ShouldDetermineScenicScoreFromBottom(int x, int y, int score)
+    {
+        var height = Input.ElementAt(y).ElementAt(x);
+        var actual = TreeCounter.ScoreBottom(Input, height, x, y);
+        actual.Should().Be(score);
     }
 }

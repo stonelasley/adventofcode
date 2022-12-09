@@ -1,39 +1,34 @@
 ﻿namespace Aoc2022.Day08;
 
-using System.ComponentModel;
-
 public class Day08 : IDay
 {
     public string SolveOne(IInputProvider inputProvider)
     {
-        TreePatchCounter counter = new();
-        List<List<int>> input = inputProvider
-            .Read()
-            .Select(x => x.ToCharArray().Select(x => int.Parse(x.ToString())).ToList())
-            .ToList();
+        List<List<int>> input = ToList(inputProvider.Read());
 
-        return counter.Count(input).ToString();
+        return TreeCounter.Count(input).ToString();
     }
 
     public string SolveTwo(IInputProvider inputProvider)
     {
-        return "";
+        List<List<int>> input = ToList(inputProvider.Read());
+
+        return TreeCounter.CalculateMaxTreeScore(input).ToString();
     }
 
     private List<List<int>> ToList(IEnumerable<string> input) =>
         input.Select(x => x.ToCharArray().Select(x => int.Parse(x.ToString())).ToList()).ToList();
 }
 
-public class TreePatchCounter
+public class TreeCounter
 {
-    public int CountPerimiter(List<List<int>> input)
-    {
-        return (input.Count * 2) + (input.Count - 2) * 2;
-    }
+    public static int CountPerimiter(List<List<int>> input) =>
+        (input.Count * 2) + (input.Count - 2) * 2;
 
-    public int Count(List<List<int>> input)
+    public static int Count(List<List<int>> input)
     {
-        var count = CountPerimiter(input);
+        int maxTreeScore = 0;
+        int count = CountPerimiter(input);
 
         for (int x = 1; x < input.Count - 1; x++)
         {
@@ -41,10 +36,10 @@ public class TreePatchCounter
             {
                 int treeHeight = input.ElementAt(y).ElementAt(x);
                 if (
-                    VisibleFromLeft(input, treeHeight, x, y)
-                    || VisibleFromRight(input, treeHeight, x, y)
-                    || VisibleFromTop(input, treeHeight, x, y)
-                    || VisibleFromBottom(input, treeHeight, x, y)
+                    IsVisibleFromLeft(input, treeHeight, x, y)
+                    || IsVisibleFromRight(input, treeHeight, x, y)
+                    || IsVisibleFromTop(input, treeHeight, x, y)
+                    || IsVisibleFromBottom(input, treeHeight, x, y)
                 )
                 {
                     count++;
@@ -55,10 +50,55 @@ public class TreePatchCounter
         return count;
     }
 
-    public bool VisibleFromLeft(List<List<int>> input, int treeHeight, int treeX, int treeY) =>
-        !input.ElementAt(treeY).GetRange(0, treeX).Any(x => x >= treeHeight);
+    public static int CalculateMaxTreeScore(List<List<int>> input)
+    {
+        int maxTreeScore = 0;
+        for (int x = 1; x < input.Count - 1; x++)
+        {
+            for (int y = 1; y < input.ElementAt(x).Count - 1; y++)
+            {
+                int treeHeight = input.ElementAt(y).ElementAt(x);
+                int treeScore =
+                    LeftScore(input, treeHeight, x, y)
+                    * TopScore(input, treeHeight, x, y)
+                    * ScoreRight(input, treeHeight, x, y)
+                    * ScoreBottom(input, treeHeight, x, y);
+                if (treeScore > maxTreeScore)
+                {
+                    maxTreeScore = treeScore;
+                }
+            }
+        }
 
-    public bool VisibleFromRight(List<List<int>> input, int treeHeight, int treeX, int treeY)
+        return maxTreeScore;
+    }
+
+    public static bool IsVisibleFromLeft(
+        List<List<int>> input,
+        int treeHeight,
+        int treeX,
+        int treeY
+    ) => !input.ElementAt(treeY).GetRange(0, treeX).Any(x => x >= treeHeight);
+
+    public static int LeftScore(List<List<int>> input, int treeHeight, int treeX, int treeY)
+    {
+        var treeScore = 1;
+        for (int i = treeX - 1; i > 0; i--)
+        {
+            var height = input[treeY][i];
+            if (height < treeHeight)
+            {
+                treeScore++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return treeScore;
+    }
+
+    public static bool IsVisibleFromRight(List<List<int>> input, int treeHeight, int treeX, int treeY)
     {
         var row = input.ElementAt(treeY);
         var remainingIndexes = (row.Count - treeX) - 1;
@@ -66,18 +106,82 @@ public class TreePatchCounter
         return !rowSegment.Any(x => x >= treeHeight);
     }
 
-    public bool VisibleFromTop(List<List<int>> input, int treeHeight, int treeX, int treeY) =>
+    public static int ScoreRight(List<List<int>> input, int treeHeight, int treeX, int treeY)
+    {
+        var treeScore = 1;
+        for (int i = treeX + 1; i < input[treeY].Count - 1; i++)
+        {
+            var height = input[treeY][i];
+            if (height < treeHeight)
+            {
+                treeScore++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return treeScore;
+    }
+
+    public static bool IsVisibleFromTop(
+        List<List<int>> input,
+        int treeHeight,
+        int treeX,
+        int treeY
+    ) =>
         !input
             .Select(x => x.ElementAt(treeX))
             .ToList()
             .GetRange(0, treeY)
             .Any(x => x >= treeHeight);
 
-    public bool VisibleFromBottom(List<List<int>> input, int treeHeight, int treeX, int treeY)
+    public static int TopScore(List<List<int>> input, int treeHeight, int treeX, int treeY)
+    {
+        var treeScore = 1;
+        for (int i = treeY - 1; i > 0; i--)
+        {
+            var height = input[i][treeX];
+            if (height < treeHeight)
+            {
+                treeScore++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return treeScore;
+    }
+
+    public static bool IsVisibleFromBottom(
+        List<List<int>> input,
+        int treeHeight,
+        int treeX,
+        int treeY
+    )
     {
         var column = input.Select(x => x.ElementAt(treeX)).ToList();
         var remainingIndexes = (column.Count - treeY) - 1;
 
         return !column.GetRange(treeY + 1, remainingIndexes).Any(x => x >= treeHeight);
+    }
+
+    public static int ScoreBottom(List<List<int>> input, int treeHeight, int treeX, int treeY)
+    {
+        var treeScore = 1;
+        for (int i = treeY + 1; i < input.Count - 1; i++)
+        {
+            var height = input[i][treeX];
+            if (height < treeHeight)
+            {
+                treeScore++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return treeScore;
     }
 }
