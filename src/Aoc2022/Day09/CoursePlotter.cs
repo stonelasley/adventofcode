@@ -1,63 +1,112 @@
 ﻿namespace Aoc2022.Day09;
 
+using System.Runtime.InteropServices;
+
 public class CoursePlotter
 {
-    public static MoveHistoryies Navigate(List<DirectionInstruction> instructions)
+    public static List<List<Point>> Navigate(
+        int chainLength,
+        List<DirectionInstruction> instructions
+    )
     {
-        int headLocationX = 0;
-        int headLocationY = 0;
-
-        List<Point> headHistory = new() { new Point(0, 0) };
-        List<Point> tailHistory = new() { new Point(0, 0) };
+        Point destinationPoint = new Point(0, 0);
+        List<List<Point>> pointChain = new();
+        for (int i = 0; i < chainLength; i++)
+        {
+            List<Point> history = new() { new Point(0, 0) };
+            pointChain.Add(history);
+        }
 
         instructions.ForEach(instruction =>
         {
-            int currentX = headLocationX;
-            int currentY = headLocationY;
-            switch (instruction.Plane)
-            {
-                case Plane.X:
-                    headLocationX += instruction.Distance;
-                    break;
-                case Plane.Y:
-                    headLocationY += instruction.Distance;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            var incrementalMoves = BuildIncrementalMoves(
-                currentX,
-                currentY,
-                headLocationX,
-                headLocationY,
+            // Copy Current Location
+            Point currentPoint = new Point(destinationPoint.X, destinationPoint.Y);
+            // Calculate Next Location
+            destinationPoint = GetNextPoint(currentPoint, instruction);
+
+            // Generate Incremental Points
+            List<Point> incrementalMoves = BuildIncrementalMoves(
+                currentPoint,
+                destinationPoint,
                 instruction
             );
 
-            foreach (var move in incrementalMoves)
+            // Add Incremental Points to History up to Destination
+            List<Point> headHistory = pointChain.First();
+            foreach (var incrementalDestination in incrementalMoves)
             {
-                headHistory.Add(move);
-                Point newTail = CalculateTailPosition(
-                    move,
-                    tailHistory.Last(),
-                    headHistory.ElementAt(headHistory.Count() - 2)
-                );
-                if (newTail != tailHistory.Last())
+                headHistory.Add(incrementalDestination);
+                // Cascade Incremental Move
+                for (int i = 1; i < pointChain.Count; i++)
                 {
-                    tailHistory.Add(newTail);
+                    List<Point> currentHistory = pointChain.ElementAt(i);
+                    List<Point> relativeHeadHistory = pointChain.ElementAt(i - 1);
+
+                    if (i == pointChain.Count - 1)
+                    {
+                        var b = 0;
+                    }
+
+                    UpdateMoveHistory(
+                        incrementalDestination,
+                        ref currentHistory,
+                        relativeHeadHistory
+                    );
                 }
             }
-            headHistory.Add(new Point(headLocationX, headLocationY));
-            Point newTail2 = CalculateTailPosition(
-                headHistory.Last(),
-                tailHistory.Last(),
-                headHistory.ElementAt(headHistory.Count() - 2)
-            );
-            if (newTail2 != tailHistory.Last())
+            headHistory.Add(destinationPoint);
+
+            for (int i = 1; i < pointChain.Count; i++)
             {
-                tailHistory.Add(newTail2);
+                var currentHistory = pointChain.ElementAt(i);
+                var relativeHeadHistory = pointChain.ElementAt(i - 1);
+
+                if (i == pointChain.Count - 1)
+                {
+                    var b = 0;
+                }
+
+                UpdateMoveHistory(
+                    relativeHeadHistory.Last(),
+                    ref currentHistory,
+                    relativeHeadHistory
+                );
             }
         });
-        return new MoveHistoryies(headHistory, tailHistory);
+        return pointChain;
+    }
+
+    public static void UpdateMoveHistory(
+        Point referencePoint,
+        ref List<Point> currentHistory,
+        List<Point> relativeHeadHistory
+    )
+    {
+        int lookBackOffset = relativeHeadHistory.Count < 2 ? 1 : 2;
+
+        var newTail = CalculateTailPosition(
+            referencePoint,
+            currentHistory.Last(),
+            relativeHeadHistory.ElementAt(relativeHeadHistory.Count() - lookBackOffset)
+        );
+
+        if (newTail != currentHistory.Last())
+        {
+            currentHistory.Add(newTail);
+        }
+    }
+
+    public static Point GetNextPoint(Point currentPoint, DirectionInstruction instruction)
+    {
+        switch (instruction.Plane)
+        {
+            case Plane.X:
+                return new Point(currentPoint.X + instruction.Distance, currentPoint.Y);
+            case Plane.Y:
+                return new Point(currentPoint.X, currentPoint.Y + instruction.Distance);
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public static Point CalculateTailPosition(
@@ -77,10 +126,8 @@ public class CoursePlotter
     }
 
     private static List<Point> BuildIncrementalMoves(
-        int currentX,
-        int currentY,
-        int futureLocationX,
-        int futureLocationY,
+        Point current,
+        Point futureLocation,
         DirectionInstruction instruction
     )
     {
@@ -90,16 +137,16 @@ public class CoursePlotter
             case Plane.X:
                 if (instruction.Distance > 0)
                 {
-                    for (int i = currentX + 1; i < futureLocationX; i++)
+                    for (int i = current.X + 1; i < futureLocation.X; i++)
                     {
-                        histories.Add(new Point(i, currentY));
+                        histories.Add(new Point(i, current.Y));
                     }
                 }
                 else
                 {
-                    for (int i = currentX - 1; i > futureLocationX; i--)
+                    for (int i = current.X - 1; i > futureLocation.X; i--)
                     {
-                        histories.Add(new Point(i, currentY));
+                        histories.Add(new Point(i, current.Y));
                     }
                 }
 
@@ -107,16 +154,16 @@ public class CoursePlotter
             case Plane.Y:
                 if (instruction.Distance > 0)
                 {
-                    for (int i = currentY + 1; i < futureLocationY; i++)
+                    for (int i = current.Y + 1; i < futureLocation.Y; i++)
                     {
-                        histories.Add(new Point(currentX, i));
+                        histories.Add(new Point(current.X, i));
                     }
                 }
                 else
                 {
-                    for (int i = currentY - 1; i > futureLocationY; i--)
+                    for (int i = current.Y - 1; i > futureLocation.Y; i--)
                     {
-                        histories.Add(new Point(currentX, i));
+                        histories.Add(new Point(current.X, i));
                     }
                 }
                 break;
