@@ -1,7 +1,9 @@
 namespace Aoc.Core;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
+[ExcludeFromCodeCoverage]
 public static class Runner
 {
     public static void Run(Assembly assembly, int upToDay = 25)

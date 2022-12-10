@@ -6,3 +6,4 @@ global using System.Linq;
 global using System;
 global using Aoc.Core;
 global using Aoc.Core.Tests;
+global using System.Drawing;

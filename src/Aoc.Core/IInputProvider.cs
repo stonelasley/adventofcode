@@ -1,11 +1,14 @@
 ﻿namespace Aoc.Core;
 
+using System.Diagnostics.CodeAnalysis;
+
 public interface IInputProvider
 {
     string[] Read();
     string ReadAllText();
 }
 
+[ExcludeFromCodeCoverage]
 public class InputReader : IInputProvider
 {
     private readonly string _directory;
