@@ -4,20 +4,21 @@ public class Day09 : IDay
 {
     public string SolveOne(IInputProvider inputProvider)
     {
-        List<DirectionInstruction> instructions = GetInstructions(inputProvider);
-        List<List<Point>> histories = CoursePlotter.Navigate(2, instructions);
-        return $"{histories.Last().Distinct().Count()}";
+        List<DirectionInstruction> instructions = BuildInstructions(inputProvider);
+        HashSet<Point> history = CoursePlotter.Navigate(2, instructions);
+        return $"{history.Count()}";
     }
 
     public string SolveTwo(IInputProvider inputProvider)
     {
-        List<DirectionInstruction> instructions = GetInstructions(inputProvider);
-        List<List<Point>> histories = CoursePlotter.Navigate(9, instructions);
-        return $"{histories.Last().Distinct().Count()}";
+        List<DirectionInstruction> instructions = BuildInstructions(inputProvider);
+        HashSet<Point> history = CoursePlotter.Navigate(10, instructions);
+        return $"{history.Count()}";
     }
 
-    public List<DirectionInstruction> GetInstructions(IInputProvider inputProvider) =>
-        inputProvider.Read().Select(x => new DirectionInstruction(x)).ToList();
+    private static List<DirectionInstruction> BuildInstructions(IInputProvider inputProvider) =>
+        inputProvider
+           .Read()
+           .Select(input => new DirectionInstruction(input))
+           .ToList();
 }
-
-//public record MoveHistoryies(IList<Point> HeadHistory, IList<Point> TailHistory);

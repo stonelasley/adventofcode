@@ -1,39 +1,36 @@
 ﻿namespace Aoc2022.Day09;
 
-public record DirectionInstruction
+public class DirectionInstruction
 {
-    public Plane Plane { get; init; }
-    public Direction Direction { get; init; }
-    public int Distance { get; init; }
-    public DirectionInstruction(string directionInput)
-    {
-        string[] inputs = directionInput.Split(' ');
-        switch (inputs[0])
-        {
-            case "U":
-                Plane = Plane.Y;
-                Direction = Direction.Up;
-                Distance = int.Parse(inputs[1]);
-                break;
-            case "D":
-                Plane = Plane.Y;
-                Direction = Direction.Down;
-                Distance = -1 * int.Parse(inputs[1]);
-                break;
-            case "L":
-                Plane = Plane.X;
-                Direction = Direction.Left;
-                Distance = -1 * int.Parse(inputs[1]);
-                break;
-            case "R":
-                Plane = Plane.X;
-                Direction = Direction.Right;
-                Distance = int.Parse(inputs[1]);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException("Uknown Direction");
-        }
+    public Direction Direction { get; set; }
+    public int Distance { get; set; }
 
+    public int XMove =>
+        Direction switch
+        {
+            Direction.Right => 1,
+            Direction.Left => -1,
+            _ => 0
+        };
+
+    public int YMove =>
+        Direction switch
+        {
+            Direction.Up => 1,
+            Direction.Down => -1,
+            _ => 0
+        };
+
+    public DirectionInstruction(string input)
+    {
+        Direction = input[0] switch
+        {
+            'R' => Direction.Right,
+            'L' => Direction.Left,
+            'U' => Direction.Up,
+            'D' => Direction.Down,
+            _ => throw new ArgumentException("Unknown Direction")
+        };
+        Distance = int.Parse(input[2..]);
     }
-    
-};
+}
