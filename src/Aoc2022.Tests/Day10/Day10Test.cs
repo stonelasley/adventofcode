@@ -181,35 +181,4 @@ public class Day10Test : BaseTest<Day10>
             actual.Should().Be("13140");
         }
     }
-
-    public class SolveTwo : Day10Test
-    {
-        //[Fact]
-        public void ShouldSolveTwo()
-        {
-            InputProvider.Setup(x => x.Read()).Returns(new[] { "" });
-
-            var actual = Sut.SolveTwo(InputProvider.Object);
-            actual.Should().Be("9000");
-        }
-    }
-}
-
-public class CathodRayTests : Day10Test
-{
-    [Theory]
-    [InlineData(1, 5, 5, 2, 5)]
-    [InlineData(59, 40, 5, 60, 340)]
-    public void ShouldIncrementCycle(
-        int cycleCount,
-        int power,
-        int sum,
-        int expectedCycleCount,
-        int expectedPower
-    )
-    {
-        CathodRayTube.Tick(ref cycleCount, ref power, sum);
-        cycleCount.Should().Be(expectedCycleCount);
-        power.Should().Be(expectedPower);
-    }
 }
