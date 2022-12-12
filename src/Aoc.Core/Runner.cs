@@ -1,5 +1,6 @@
 namespace Aoc.Core;
 
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
