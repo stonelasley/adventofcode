@@ -1,13 +1,15 @@
 namespace Aoc2022.Day11;
 
+using System.Numerics;
+
 public class Monkey
 {
     public int Inspections { get; set; } = 0;
-    public int Number { get; init; }
-    public List<long> Items { get; init; } = new();
+    public long Number { get; init; }
+    public List<long > Items { get; init; } = new();
     public int TrueMonkey { get; init; }
     public int FalseMonkey { get; init; }
-    public int TestNumber { get; init; }
+    public long TestNumber { get; init; }
     public Predicate<long> Test { get; init; }
     public Func<long, long> Operation;
 
@@ -69,7 +71,7 @@ public class Monkey
             }
             if (line[0] == 'T')
             {
-                TestNumber = int.Parse(line[19..]);
+                TestNumber = long.Parse(line[19..]);
                 Test = number => number % TestNumber == 0;
             }
             if (line[3..7] == "true")
