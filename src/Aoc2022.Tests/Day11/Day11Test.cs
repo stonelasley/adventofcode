@@ -55,18 +55,6 @@ public class Day11Test : BaseTest<Day11>
             actual.Should().Be("10605");
         }
     }
-
-    public class SolveTwo : Day11Test
-    {
-        [Fact]
-        public void ShouldSolve()
-        {
-            InputProvider.Setup(x => x.Read()).Returns(new string[] { "" });
-
-            var actual = Sut.SolveTwo(InputProvider.Object);
-            actual.Should().NotBe("");
-        }
-    }
 }
 
 public class MonkeyTest : Day10Test
