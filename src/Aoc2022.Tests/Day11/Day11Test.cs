@@ -1,7 +1,6 @@
 namespace Aoc2022.Tests.Day11;
 
 using Aoc2022.Day11;
-using Day10;
 
 public class Day11Test : BaseTest<Day11>
 {
@@ -57,7 +56,7 @@ public class Day11Test : BaseTest<Day11>
     }
 }
 
-public class MonkeyTest : Day10Test
+public class MonkeyTest : Day11Test
 {
     [Fact]
     public void ShouldParse()
