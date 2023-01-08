@@ -18,10 +18,8 @@ public class InputReader : IInputProvider
         _directory = directory;
     }
 
-    public string[] Read()
-    {
-        return File.ReadLines($"{_directory}/input.txt").ToArray();
-    }
+    public string[] Read() =>
+      File.ReadLines($"{_directory}/input.txt").ToArray();
 
     public string ReadAllText()
     {

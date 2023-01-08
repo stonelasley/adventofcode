@@ -1,5 +1,7 @@
 namespace Aoc.Core;
 
+using System.Diagnostics.CodeAnalysis;
+
 public static class Extensions
 {
     public static T[] GetRow<T>(this T[,] matrix, int rowNumber)

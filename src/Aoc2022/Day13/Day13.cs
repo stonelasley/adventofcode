@@ -1,7 +1,5 @@
 ﻿namespace Aoc2022.Day13;
 
-using System.Diagnostics;
-
 public class Day13 : IDay
 {
     public string SolveOne(IInputProvider inputProvider)
@@ -29,6 +27,18 @@ public class Day13 : IDay
 
     public string SolveTwo(IInputProvider inputProvider)
     {
-        return "";
+        string[] dividerPackets = { "[[2]]", "[[6]]" };
+
+        List<string> pairs = inputProvider.Read()
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Concat(dividerPackets)
+            .ToList();
+
+        pairs.Sort(Packets.CompareStrings);
+
+        var ix1 = pairs.IndexOf(dividerPackets[0]);
+        var ix2 = pairs.IndexOf(dividerPackets[1]);
+
+        return $"{++ix1 * ++ix2}";
     }
 }

@@ -49,4 +49,11 @@ public static class Packets
         }
         return Math.Sign(first.Count - second.Count);
     }
+    
+    public static int CompareStrings(string first, string second)
+    {
+        var listOne = Parser.ParseList(first.ToCharQueue());
+        var listTwo = Parser.ParseList(second.ToCharQueue());
+        return CompareLists(listOne, listTwo);
+    }
 }

@@ -57,4 +57,21 @@ public class PacketTests
             Packets.CompareLists(leftList, rightList).Should().Be(expected);
         }
     }
+
+    public class CompareString
+    {
+        
+        [Theory]
+        [InlineData("[1,1,3,1,1]", "[1,1,5,1,1]", -1)]
+        [InlineData("[[1],[2,3,4]]", "[[1],4]", -1)]
+        [InlineData("[9]", "[[8,7,6]]", 1)]
+        [InlineData("[7,7,7,7]", "[7,7,7]", 1)]
+        [InlineData("[]", "[3]", -1)]
+        [InlineData("[[[]]]", "[[]]", 1)]
+        [InlineData("[1,[2,[3,[4,[5,6,7]]]],8,9]", "[1,[2,[3,[4,[5,6,0]]]],8,9]]", 1)]
+        public void ShouldCompareStrings(string left, string right, int expected)
+        {
+            Packets.CompareStrings(left, right).Should().Be(expected);
+        }
+    }
 }
