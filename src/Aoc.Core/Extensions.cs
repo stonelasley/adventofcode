@@ -7,6 +7,21 @@ public static class Extensions
         return Enumerable.Range(0, matrix.GetLength(1)).Select(x => matrix[rowNumber, x]).ToArray();
     }
 
+    public static Queue<char> ToCharQueue(this string input, StringSplitOptions? options = null)
+    {
+        Queue<char> queue = new();
+        foreach (char c in input)
+        {
+            if(options == StringSplitOptions.RemoveEmptyEntries && c == ' ')
+            {
+                continue;
+            }
+            queue.Enqueue(c);
+        }
+
+        return queue;
+    }
+    
     public static long GCD(long a, long b)
     {
         while (a != 0 && b != 0)
