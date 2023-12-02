@@ -5,10 +5,8 @@ public class Game
     public int Number { get; private set; }
     public List<CubeSet> Sets { get; set; } = new();
 
-    private readonly Dictionary<string, int> _maxCubes;
-    public Game(string input, Dictionary<string, int> maxCubes)
+    public Game(string input, Dictionary<string, int>? maxCubes = null)
     {
-        _maxCubes = maxCubes;
         string[] gameSplit = input.Split(':', StringSplitOptions.TrimEntries);
         string gameNumber = gameSplit[0].Split(' ', StringSplitOptions.TrimEntries)[1];
         Number = int.Parse(gameNumber);
@@ -16,12 +14,18 @@ public class Game
 
         foreach (string cubeSet in cubeSets)
         {
-            Sets.Add(new CubeSet(cubeSet));
+            Sets.Add(new CubeSet(cubeSet, maxCubes));
         }
     }
 
-    public int PossibleCubeCount =>
-    
-        Sets.Count(x => x.IsPossible(_maxCubes));
-   
+    public bool IsPossible => Sets.All(x => x.Possible);
+    public int FindMax(string color)
+    {
+        List<CubeCount> cubeCounts = Sets.SelectMany(x => x.CubeCounts.Where(x => x.Color == color)).ToList();
+        
+        if(!cubeCounts.Any()) return 0;
+        
+        return cubeCounts.Max(x => x.Count);
+    } 
+
 }

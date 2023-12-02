@@ -4,20 +4,27 @@ public class Day02 : IDay
 {
     public string SolveOne(IInputProvider inputProvider)
     {
-        Dictionary<string, int> maxCubes = new Dictionary<string, int>()
+        Dictionary<string, int> maxCubes = new ()
         {
             { "red", 12 },
             { "green", 13 },
             { "blue", 14 }
         };
-        var games = inputProvider.Read().Select(x => new Game(x, maxCubes)).ToList();
-        var possibleGames = games.Where(x => x.PossibleCubeCount > 0);
-        return $"{possibleGames.Sum(x => x.Number)}";
+        return inputProvider.Read()
+                            .Select(x => new Game(x, maxCubes))
+                            .Where(x => x.IsPossible)
+                            .Sum(x => x.Number)
+                            .ToString();
     }
 
-    public string SolveTwo(IInputProvider inputProvider)
-    {
-        var input = inputProvider.Read();
-        return "UnSolved";
-    }
+    public string SolveTwo(IInputProvider inputProvider) =>
+        inputProvider.Read()
+                     .Select(x => new Game(x))
+                     .Select(g =>
+                                  g.FindMax("red")
+                                  * g.FindMax("green") * g.FindMax("blue"))
+                     .Sum()
+                     .ToString();
+
+
 }

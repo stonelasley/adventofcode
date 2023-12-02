@@ -19,7 +19,6 @@ public class CubeSetTests
     [InlineData("2 green", 0, 1, 0, false)]
     [InlineData("3 blue, 4 red", 5, 0, 2, false)]
     [InlineData("3 blue, 4 red", 4, 0, 3, true)]
-    //[InlineData("1 red, 2 green, 6 blue", 3)]
     public void ShouldAssessMaximum(
         string input,
         int maxRed,
@@ -34,7 +33,7 @@ public class CubeSetTests
             { "green", maxGreen },
             { "blue", maxBlue }
         };
-        var cubeSet = new CubeSet(input);
-        cubeSet.IsPossible(max).Should().Be(possible);
+        var cubeSet = new CubeSet(input, max);
+        cubeSet.Possible.Should().Be(possible);
     }
 }
