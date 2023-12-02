@@ -17,8 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Aoc.Core.Tests\Aoc.Core.Tests.csproj"/>
-        <ProjectReference Include="..\Aoc2021\Aoc2021.csproj"/>
+        <ProjectReference Include="..\..\src\Aoc2021\Aoc2021.csproj" />
+        <ProjectReference Include="..\Aoc.Core.Tests\Aoc.Core.Tests.csproj" />
     </ItemGroup>
 
 </Project>
