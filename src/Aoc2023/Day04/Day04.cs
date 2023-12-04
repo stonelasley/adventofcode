@@ -11,6 +11,19 @@ public class Day04 : IDay
     public string SolveTwo(IInputProvider inputProvider)
     {
         string[] input = inputProvider.Read();
-        return input.Select(line => new Card(line, input)).Sum(x => x.Count).ToString();
+        Card[] cards = input.Select(line => new Card(line)).ToArray();
+        int[] counts = cards.Select(x => 1).ToArray();
+
+        for (int i = 0; i < cards.Length; i++)
+        {
+            var (card, count) = (cards[i], counts[i]);
+            for (int j = 0; j < card.Matches; j++)
+            {
+                counts[i + j + 1] += count;
+
+            }
+
+        }
+        return counts.Sum().ToString();
     }
 }
