@@ -39,9 +39,11 @@ public class Day03Test : BaseTest<Day03>
         [Fact]
         public void ShouldSolve()
         {
-            InputProvider.Setup(x => x.Read()).Returns(new[]
-            {
-                
+            InputProvider
+                .Setup(x => x.Read())
+                .Returns(
+                    new[]
+                    {
                         "467..114..",
                         "...*......",
                         "..35..633.",
@@ -52,8 +54,8 @@ public class Day03Test : BaseTest<Day03>
                         "......755.",
                         "...$.*....",
                         ".664.598.."
-                
-            });
+                    }
+                );
             string result = Sut.SolveTwo(InputProvider.Object);
             result.Should().Be("467835");
         }
@@ -63,7 +65,7 @@ public class Day03Test : BaseTest<Day03>
     {
         [Theory]
         [InlineData("..........", 10, -1, "")]
-        [InlineData("...*......", 10, 3, "*" )]
+        [InlineData("...*......", 10, 3, "*")]
         [InlineData("467*......", 8, 0, "467")]
         [InlineData("467*......", 8, 1, "*")]
         [InlineData("*467......", 8, 0, "*")]
@@ -73,7 +75,12 @@ public class Day03Test : BaseTest<Day03>
         [InlineData("467*617...", 6, 2, "617")]
         [InlineData("1.1.1.1.1.", 10, 4, "1")]
         [InlineData("467..114..", 6, 3, "114")]
-        public void ShouldParseLine(string inputLine, int expectedLength, int checkIndex, string expectedVal)
+        public void ShouldParseLine(
+            string inputLine,
+            int expectedLength,
+            int checkIndex,
+            string expectedVal
+        )
         {
             var result = Sut.ParseLine(0, inputLine);
             result.Count.Should().Be(expectedLength);
@@ -84,7 +91,7 @@ public class Day03Test : BaseTest<Day03>
         }
     }
 
-    public class TestDataGenerator : IEnumerable<object[]>
+    public class PartNumberDataGenerator : IEnumerable<object[]>
     {
         private readonly List<object[]> _data = new List<object[]>
         {
@@ -106,107 +113,107 @@ public class Day03Test : BaseTest<Day03>
                     Lines = new[] { "...*617..." }
                 }
             },
-          new object[]
-          {
-              new
-              {
-                  Expected = 0,
-                  TargetLine = 0,
-                  Lines = new[] { "617......." }
-              },
-          },
-          new object[]
-          {
-              new
-              {
-                  Expected = 617,
-                  TargetLine = 1,
-                  Lines = new[]
-                  {
-                      "*.........",
-                      "617......."
-                  }
-              },
-          },
-          new object[]
-          {
-              new
-              {
-                  Expected = 617,
-                  TargetLine = 1,
-                  Lines = new[]
-                  {
-                      "...*......",
-                      "617......."
-                  }
-              },
-          },
-          new object[]
-          {
-              new
-              {
-                  Expected = 617,
-                  TargetLine = 0,
-                  Lines = new[]
-                  {
-                      "617.......",
-                      "*........."
-                  }
-              },
-          },
-          new object[]
-          {
-              new
-              {
-                  Expected = 617,
-                  TargetLine = 0,
-                  Lines = new[]
-                  {
-                      "617.......",
-                      "...*......"
-                  }
-              },
-          },
-          new object[]
-          {
-              new
-              {
-                  Expected = 0,
-                  TargetLine = 0,
-                  Lines = new[]
-                  {
-                      "617.......",
-                      "..........",
-                      "*........."
-                  }
-              },
-          },
-          new object[]
-          {
-              new
-              {
-                  Expected = 0,
-                  TargetLine = 0,
-                  Lines = new[]
-                  {
-                      "617.......",
-                      "....*.....",
-                  }
-              },
-          },
-          new object[]
-          {
-              new
-              {
-                  Expected = 0,
-                  TargetLine = 0,
-                  Lines = new[]
-                  {
-                      ".*........",
-                      "...617...."
-                  }
-              },
-          }
+            new object[]
+            {
+                new
+                {
+                    Expected = 0,
+                    TargetLine = 0,
+                    Lines = new[] { "617......." }
+                },
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 617,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        "*.........",
+                        "617......."
+                    }
+                },
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 617,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        "...*......",
+                        "617......."
+                    }
+                },
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 617,
+                    TargetLine = 0,
+                    Lines = new[]
+                    {
+                        "617.......",
+                        "*........."
+                    }
+                },
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 617,
+                    TargetLine = 0,
+                    Lines = new[]
+                    {
+                        "617.......",
+                        "...*......"
+                    }
+                },
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 0,
+                    TargetLine = 0,
+                    Lines = new[]
+                    {
+                       "617.......",
+                       "..........",
+                       "*........."
+                    }
+                },
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 0,
+                    TargetLine = 0,
+                    Lines = new[]
+                    {
+                        "617.......",
+                        "....*.....",
+                    }
+                },
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 0,
+                    TargetLine = 0,
+                    Lines = new[]
+                    {
+                        ".*........",
+                        "...617...."
+                    }
+                },
+            }
         };
 
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
@@ -217,10 +224,10 @@ public class Day03Test : BaseTest<Day03>
     public class ParsePartNumbers : Day03Test
     {
         [Theory]
-        [ClassData(typeof(TestDataGenerator))]
+        [ClassData(typeof(PartNumberDataGenerator))]
         public void ShouldExtractNumbers(dynamic input)
         {
-            List<SchematicNumber> testData = new();
+            List<SchematicItem> testData = new();
             for (int i = 0; i < input.Lines.Length; i++)
             {
                 testData.AddRange(Sut.ParseLine(i, input.Lines[i]));
@@ -229,36 +236,167 @@ public class Day03Test : BaseTest<Day03>
             result.Should().Be(input.Expected);
         }
     }
-}
 
-public class SchematicNumberTest : Day03Test
-{
-    [Theory]
-    [InlineData(0, "467", 0, 0, 2, false, false, true)]
-    [InlineData(1, "*", 3, 3, 3, false, true, false)]
-    [InlineData(1, "%", 3, 3, 3, false, true, false)]
-    [InlineData(1, "#", 3, 3, 3, false, true, false)]
-    [InlineData(1, "_", 3, 3, 3, true, false, false)]
-    [InlineData(1, "", 3, 3, 3, true, false, false)]
-    [InlineData(9, "655", 7, 7, 9, false, false, true)]
-    public void ShouldInitialize(
-        int lineNumber,
-        string inputValue,
-        int inputIndex,
-        int expectedStartIndex,
-        int expectedEndIndex,
-        bool expectedIsEmpty,
-        bool expectedIsSymbol,
-        bool expectedIsNumber
-    )
+    public class GearDataGenerator : IEnumerable<object[]>
     {
-        var actual = new SchematicNumber(lineNumber, inputValue, inputIndex);
-        actual.LineNumber.Should().Be(lineNumber);
-        actual.Value.Should().Be(inputValue);
-        actual.Index.Should().Be(expectedStartIndex);
-        actual.IsEmpty.Should().Be(expectedIsEmpty);
-        actual.EndIndex.Should().Be(expectedEndIndex);
-        actual.IsSymbol.Should().Be(expectedIsSymbol);
-        actual.IsNumber.Should().Be(expectedIsNumber);
+        private readonly List<object[]> _data = new List<object[]>
+        {
+             new object[]
+             {
+                 new
+                 {
+                     Expected = 0,
+                     TargetLine = 0,
+                     Lines = new[]
+                     {
+                         "617*......"
+                     }
+                 }
+             },
+            new object[]
+             {
+                 new
+                 {
+                     Expected = 6,
+                     TargetLine = 0,
+                     Lines = new[]
+                     {
+                         "..2*3....."
+                     }
+                 }
+             },
+            new object[]
+            {
+                new
+                {
+                    Expected = 451490,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        "......755.",
+                        "...$.*....",
+                        ".664.598.."
+                    }
+                }
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 0,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        "....9.755.",
+                        "...$.*....",
+                        ".664.598.."
+                    }
+                }
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 16345,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        "467..114..",
+                        "...*......",
+                        "..35..633.",
+                    }
+                }
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 27,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        "....9.....",
+                        "...*......",
+                        "..3.......",
+                    }
+                }
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 12,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        "..4.......",
+                        "...*......",
+                        "....3.....",
+                    }
+                }
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 2400,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        "...80......",
+                        "...*......",
+                        "...30.....",
+                    }
+                }
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 745009,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        ".................871....816....697....",
+                        "..............68..*......&....*.......",
+                        "...............*..336.364...649........",
+                    }
+                }
+            },
+            new object[]
+            {
+                new
+                {
+                    Expected = 292656,
+                    TargetLine = 1,
+                    Lines = new[]
+                    {
+                        ".................871....816...........",
+                        "..............68..*......&....*.......",
+                        "...............*..336.364..............",
+                    }
+                }
+            }
+        };
+
+        public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
+    public class ParseGears : Day03Test
+    {
+        [Theory]
+        [ClassData(typeof(GearDataGenerator))]
+        public void ShouldExtractGears(dynamic input)
+        {
+            List<SchematicItem> testData = new();
+            for (int i = 0; i < input.Lines.Length; i++)
+            {
+                testData.AddRange(Sut.ParseLine(i, input.Lines[i]));
+            }
+            int result = Sut.ParseGears(input.TargetLine, testData);
+            result.Should().Be(input.Expected);
+        }
     }
 }
