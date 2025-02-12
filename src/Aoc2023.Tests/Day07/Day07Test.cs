@@ -40,7 +40,7 @@ public class Day07Test : BaseTest<Day07>
                     "QQQJA 483"
                 ]);
             string result = Sut.SolveTwo(InputProvider.Object);
-            result.Should().Be("UnSolved");
+            result.Should().Be("unsolved");
         }
     }
 
