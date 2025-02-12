@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        dotnet-version: ['5.0.x', '6.0.x', '7.0.x', '8.0.x' ]
+        dotnet-version: ['8.0.x' ]
 
     runs-on: ubuntu-latest  # For a list of available runner types, refer to
     
